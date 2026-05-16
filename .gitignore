@@ -1,0 +1,12 @@
+﻿.env
+.env.*
+*.key
+*.pem
+*.secret
+.opencode/cache/
+.opencode/state/
+.opencode/tmp/
+.log
+node_modules/
+package-lock.json
+bun.lock
