@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEGIS — Installed Skills, Tools & Council</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --card: #111827;
+    --border: #1e293b;
+    --green: #22c55e;
+    --cyan: #06b6d4;
+    --yellow: #eab308;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #3b82f6;
+    --red: #ef4444;
+    --purple: #a855f7;
+    --orange: #f97316;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 2rem;
+    line-height: 1.6;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 {
+    font-size: 1.8rem;
+    color: var(--cyan);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+  .subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .badge-green  { background: #166534; color: var(--green); }
+  .badge-cyan   { background: #164e63; color: var(--cyan); }
+  .badge-yellow { background: #713f12; color: var(--yellow); }
+  .badge-blue   { background: #1e3a5f; color: var(--accent); }
+  .badge-red    { background: #7f1d1d; color: var(--red); }
+  .badge-purple { background: #581c87; color: var(--purple); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .card-header h2 { font-size: 1.2rem; color: var(--cyan); }
+
+  .source {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+  }
+  .source a { color: var(--accent); text-decoration: none; }
+  .source a:hover { text-decoration: underline; }
+
+  .desc { color: var(--text); font-size: 0.9rem; margin-bottom: 1rem; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+  }
+  .skill-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.82rem;
+  }
+  .skill-item strong { color: var(--green); }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .table th, .table td {
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .table th { color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
+  .table td { color: var(--text); }
+  .table td code {
+    background: var(--bg);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--cyan);
+  }
+
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .stat .num { font-size: 1.8rem; font-weight: 700; color: var(--cyan); }
+  .stat .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; margin-top: 0.2rem; }
+
+  .section-title {
+    font-size: 1rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 1.5rem 0 0.8rem;
+    font-weight: 600;
+  }
+
+  .council-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+  }
+  .council-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    border-left: 3px solid var(--accent);
+    transition: border-color 0.2s;
+  }
+  .council-card:hover { border-left-color: var(--cyan); }
+  .council-card h3 { font-size: 0.95rem; color: var(--cyan); margin-bottom: 0.3rem; }
+  .council-card .domain { color: var(--muted); font-size: 0.78rem; margin-bottom: 0.5rem; }
+  .council-card .authority { font-size: 0.75rem; padding: 0.1rem 0.4rem; border-radius: 4px; display: inline-block; }
+  .auth-critical { background: #7f1d1d; color: var(--red); }
+  .auth-hardgate { background: #713f12; color: var(--yellow); }
+  .auth-high { background: #1e3a5f; color: var(--accent); }
+  .auth-medium { background: #164e63; color: var(--cyan); }
+  .auth-advisory { background: #581c87; color: var(--purple); }
+  .council-card .triggers { margin-top: 0.5rem; font-size: 0.75rem; color: var(--muted); }
+  .council-card .triggers code { color: var(--yellow); background: var(--card); padding: 0.05rem 0.3rem; border-radius: 3px; }
+
+  .load-report {
+    background: var(--card);
+    border: 1px solid var(--green);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .load-report h3 { color: var(--green); margin-bottom: 0.8rem; }
+  .load-report .status-line { display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+  .load-report .status-line:last-child { border-bottom: none; }
+  .load-report .status-label { color: var(--muted); }
+  .load-report .status-value { font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>AEGIS Sentinel — Full System Inventory</h1>
+  <p class="subtitle">Phase 8 Installation + Phase 9 Council Re-Initialization · Rebuild #3 · May 16, 2026</p>
+
+  <!-- COUNCIL LOAD REPORT -->
+  <div class="load-report">
+    <h3>AEGIS COUNCIL LOAD REPORT</h3>
+    <div class="status-line"><span class="status-label">Files discovered (O:\Apex_Aegis\)</span><span class="status-value" style="color: var(--cyan);">46</span></div>
+    <div class="status-line"><span class="status-label">Council files</span><span class="status-value" style="color: var(--green);">36</span></div>
+    <div class="status-line"><span class="status-label">Governance files</span><span class="status-value" style="color: var(--green);">9</span></div>
+    <div class="status-line"><span class="status-label">APRE reports</span><span class="status-value" style="color: var(--green);">1</span></div>
+    <div class="status-line"><span class="status-label">Council roles loaded</span><span class="status-value" style="color: var(--green);">10 / 10</span></div>
+    <div class="status-line"><span class="status-label">Governance file</span><span class="status-value" style="color: var(--green);">FOUND</span></div>
+    <div class="status-line"><span class="status-label">APRE / Peer Review</span><span class="status-value" style="color: var(--green);">FOUND</span></div>
+    <div class="status-line"><span class="status-label">Council role definitions</span><span class="status-value" style="color: var(--green);">FOUND</span></div>
+    <div class="status-line"><span class="status-label">Risk assessment</span><span class="status-value" style="color: var(--green);">LOW (complete coverage)</span></div>
+  </div>
+
+  <div class="summary">
+    <div class="stat"><div class="num">3</div><div class="label">Packages Installed</div></div>
+    <div class="stat"><div class="num">10</div><div class="label">Council Members</div></div>
+    <div class="stat"><div class="num">91</div><div class="label">Skills Loaded</div></div>
+    <div class="stat"><div class="num">48</div><div class="label">Commands Available</div></div>
+  </div>
+
+  <!-- HIGH COUNCIL -->
+  <div class="card">
+    <div class="card-header">
+      <h2>The High Council — Decision Engine</h2>
+      <span class="badge badge-purple">Source of Truth</span>
+    </div>
+    <div class="source">
+      Location: <code>O:\Apex_Aegis\Council\</code> · Governance: <code>Council_Governance_Charter.md</code> v3.1
+    </div>
+    <p class="desc">
+      The Aegis High Council provides specialized intelligence across all strategic and tactical domains. The Sentinel (Operator) is the sole source of authority — no Council member executes actions that violate Local Sovereignty, Data Privacy, or Jurisdictional Defense.
+    </p>
+
+    <div class="council-grid">
+      <div class="council-card" style="border-left-color: #3b82f6;">
+        <h3>THE TITAN</h3>
+        <div class="domain">Macroeconomic Strategy · Systemic Risk · Decision Architecture</div>
+        <span class="authority auth-high">High Authority</span>
+        <div class="triggers">Triggers: <code>TITAN-001</code> through <code>TITAN-010</code></div>
+      </div>
+      <div class="council-card" style="border-left-color: #a855f7;">
+        <h3>THE NAVIGATOR</h3>
+        <div class="domain">Roadmap · Timing · Priority · 20-Year Vision</div>
+        <span class="authority auth-high">High Authority</span>
+        <div class="triggers">Veto: Priority Conflicts</div>
+      </div>
+      <div class="council-card" style="border-left-color: #06b6d4;">
+        <h3>THE ARCHITECT</h3>
+        <div class="domain">n8n Orchestration · Agent Mesh · System Logic</div>
+        <span class="authority auth-high">High Authority</span>
+        <div class="triggers">Triggers: <code>ARCH-001</code> through <code>ARCH-012</code></div>
+      </div>
+      <div class="council-card" style="border-left-color: #ef4444;">
+        <h3>THE SHIELD</h3>
+        <div class="domain">Data Sovereignty · Encryption · Key Management · L1-L4 Classification</div>
+        <span class="authority auth-critical">CRITICAL Authority</span>
+        <div class="triggers">Triggers: <code>SHLD-001</code> through <code>SHLD-012</code></div>
+      </div>
+      <div class="council-card" style="border-left-color: #f97316;">
+        <h3>THE WARDEN</h3>
+        <div class="domain">Network Security · Perimeter Defense · Hardware</div>
+        <span class="authority auth-critical">CRITICAL Authority</span>
+        <div class="triggers">Veto: Egress / Perimeter Breach</div>
+      </div>
+      <div class="council-card" style="border-left-color: #eab308;">
+        <h3>THE AUDITOR (CRA)</h3>
+        <div class="domain">Tax Compliance · Legal Review · CRA Regulations</div>
+        <span class="authority auth-critical">CRITICAL Authority</span>
+        <div class="triggers">Veto: Regulatory / Tax Exposure</div>
+      </div>
+      <div class="council-card" style="border-left-color: #22c55e;">
+        <h3>THE CHANCELLOR</h3>
+        <div class="domain">Cash Flow · Burn Rate · Bookkeeping · Liquidity</div>
+        <span class="authority auth-medium">Medium-High Authority</span>
+        <div class="triggers">Veto: Liquidity / Solvency</div>
+      </div>
+      <div class="council-card" style="border-left-color: #f97316;">
+        <h3>THE CATALYST</h3>
+        <div class="domain">State Management · Execution Speed · Burnout Prevention</div>
+        <span class="authority auth-hardgate">HARD GATE</span>
+        <div class="triggers">Veto: Burnout / Low-State Action</div>
+      </div>
+      <div class="council-card" style="border-left-color: #a855f7;">
+        <h3>THE ORACLE</h3>
+        <div class="domain">Trend Prediction · Signal Intelligence · Future-Proofing</div>
+        <span class="authority auth-advisory">Advisory-High</span>
+        <div class="triggers">Veto: Signal Integrity</div>
+      </div>
+      <div class="council-card" style="border-left-color: #f97316;">
+        <h3>THE SENTINEL WARDEN</h3>
+        <div class="domain">Physical Security · Environmental · Facility Risk</div>
+        <span class="authority auth-medium">Medium Authority</span>
+        <div class="triggers">Veto: Hardware / Facility Risk</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APRE -->
+  <div class="card">
+    <div class="card-header">
+      <h2>APRE — Peer Review Engine</h2>
+      <span class="badge badge-yellow">Validation Layer</span>
+    </div>
+    <div class="source">
+      Location: <code>O:\Apex_Aegis\logs\apre_reports\</code> · Script: <code>O:\Apex_Aegis\scripts\run_apre.py</code>
+    </div>
+    <p class="desc">
+      The Aegis Peer Review Engine validates all complex and high-impact actions through multi-role evaluation. Cross-checks decisions for risk, scalability, and integrity before execution.
+    </p>
+    <table class="table">
+      <tr><th>Component</th><th>Location</th><th>Status</th></tr>
+      <tr><td>APRE Audit Report</td><td><code>O:\Apex_Aegis\Council\Council_APRE_Audit.md</code></td><td><span class="badge badge-green">FOUND</span></td></tr>
+      <tr><td>APRE Build v2</td><td><code>O:\Apex_Aegis\Council\APRE_Audit_Build_v2.md</code></td><td><span class="badge badge-green">FOUND</span></td></tr>
+      <tr><td>APRE Score (Skills)</td><td><code>O:\Apex_Aegis\Council\APRE_Score_Skills_MD_2026-05-15.md</code></td><td><span class="badge badge-green">FOUND</span></td></tr>
+      <tr><td>APRE Runner Script</td><td><code>O:\Apex_Aegis\scripts\run_apre.py</code></td><td><span class="badge badge-green">FOUND</span></td></tr>
+      <tr><td>APRE Report Log</td><td><code>O:\Apex_Aegis\logs\apre_reports\</code></td><td><span class="badge badge-green">FOUND</span></td></tr>
+    </table>
+  </div>
+
+  <!-- TOOL 1: AgentShield -->
+  <div class="card">
+    <div class="card-header">
+      <h2>AgentShield</h2>
+      <span class="badge badge-green">Security Layer</span>
+    </div>
+    <div class="source">
+      Source: <a href="https://ecc.tools">ecc.tools</a> · npm: <code>ecc-agentshield@1.4.0</code>
+    </div>
+    <p class="desc">
+      Red-team / blue-team / auditor pipeline for AI agent config security. Scans CLAUDE.md, .cursorrules, agents.json, hooks, and MCP surfaces for prompt injection, config drift, and guardrail gaps.
+    </p>
+    <table class="table">
+      <tr><th>Capability</th><th>Detail</th></tr>
+      <tr><td>Config Scanner</td><td>Scans agent config files for security weaknesses</td></tr>
+      <tr><td>Injection Detection</td><td>Red-team adversarial prompt testing</td></tr>
+      <tr><td>Guardrail Verification</td><td>Blue-team validates safety boundaries</td></tr>
+      <tr><td>Audit Report</td><td>Structured report with severity + remediation</td></tr>
+      <tr><td>Rules</td><td>102 security rules · 1,282 tests</td></tr>
+    </table>
+  </div>
+
+  <!-- TOOL 2: Superpowers Framework -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Superpowers Framework</h2>
+      <span class="badge badge-yellow">Workflow Engine</span>
+    </div>
+    <div class="source">
+      Source: npm: <code>superpowers@0.0.2</code> · GitHub: <code>jessevincent/superpowers</code> <span class="badge badge-yellow">repo 404</span>
+    </div>
+    <p class="desc">
+      Workflow automation framework. Installed globally as a base package. (Note: upstream GitHub repo returned 404; installed from npm registry.)
+    </p>
+  </div>
+
+  <!-- TOOL 3: ECC Universal (covers tools 3-6) -->
+  <div class="card">
+    <div class="card-header">
+      <h2>ECC Universal</h2>
+      <span class="badge badge-cyan">Harness Suite</span>
+    </div>
+    <div class="source">
+      Source: <a href="https://ecc.tools/skills">ecc.tools/skills</a> · npm: <code>ecc-universal@1.10.0</code>
+    </div>
+    <p class="desc">
+      Universal installer for the ECC ecosystem — skills, agents, hooks, and commands across Claude Code, Codex, OpenCode, Cursor, and related harnesses. This single package covers the following originally-requested tools as built-in skills/commands:
+    </p>
+
+    <div class="section-title">Originally Requested → Actual ECC Skill/Command</div>
+    <table class="table">
+      <tr><th>Requested Tool</th><th>ECC Equivalent</th><th>Type</th></tr>
+      <tr><td>env-doctor</td><td><code>/security-review</code> + config audit skills</td><td>Skill</td></tr>
+      <tr><td>context-save-cli</td><td><code>/save-session</code> + <code>/resume-session</code></td><td>Command</td></tr>
+      <tr><td>context-switch-protector</td><td><code>/strategic-compact</code> + <code>/checkpoint</code></td><td>Skill</td></tr>
+      <tr><td>workflow-speed-optimizer</td><td><code>/continuous-learning-v2</code> + <code>/model-route</code></td><td>Skill</td></tr>
+    </table>
+
+    <div class="section-title">Key Skills (selected)</div>
+    <div class="skills-grid">
+      <div class="skill-item"><strong>/tdd-workflow</strong> — Test-driven development enforcement</div>
+      <div class="skill-item"><strong>/security-review</strong> — OWASP Top 10 + secret detection</div>
+      <div class="skill-item"><strong>/security-scan</strong> — Automated config scanning</div>
+      <div class="skill-item"><strong>/continuous-learning</strong> — Pattern extraction from sessions</div>
+      <div class="skill-item"><strong>/continuous-learning-v2</strong> — Instinct-based learning</div>
+      <div class="skill-item"><strong>/strategic-compact</strong> — Context compaction at intervals</div>
+      <div class="skill-item"><strong>/verification-loop</strong> — Structured code quality checks</div>
+      <div class="skill-item"><strong>/agentic-engineering</strong> — Eval-first execution</div>
+      <div class="skill-item"><strong>/coding-standards</strong> — TypeScript/JS/React/Node standards</div>
+      <div class="skill-item"><strong>/prompt-optimizer</strong> — Prompt quality & cost optimization</div>
+      <div class="skill-item"><strong>/deployment-patterns</strong> — CI/CD & production readiness</div>
+      <div class="skill-item"><strong>/docker-patterns</strong> — Multi-stage builds & Compose</div>
+    </div>
+
+    <div class="section-title">Key Agents (selected)</div>
+    <div class="skills-grid">
+      <div class="skill-item"><strong>planner</strong> — Feature implementation planning</div>
+      <div class="skill-item"><strong>architect</strong> — System design & scalability</div>
+      <div class="skill-item"><strong>code-reviewer</strong> — Quality & security review</div>
+      <div class="skill-item"><strong>security-reviewer</strong> — OWASP scanning</div>
+      <div class="skill-item"><strong>tdd-guide</strong> — 80%+ coverage enforcement</div>
+      <div class="skill-item"><strong>e2e-runner</strong> — Playwright testing</div>
+      <div class="skill-item"><strong>build-error-resolver</strong> — Build error resolution</div>
+      <div class="skill-item"><strong>doc-updater</strong> — Documentation & codemaps</div>
+      <div class="skill-item"><strong>harness-optimizer</strong> — Config analysis & improvement</div>
+      <div class="skill-item"><strong>loop-operator</strong> — Autonomous loop management</div>
+      <div class="skill-item"><strong>chief-of-staff</strong> — Communication triage</div>
+      <div class="skill-item"><strong>database-reviewer</strong> — PostgreSQL specialist</div>
+    </div>
+
+    <div class="section-title">Key Commands (selected)</div>
+    <div class="skills-grid">
+      <div class="skill-item"><code>/plan</code> — Step-by-step implementation plans</div>
+      <div class="skill-item"><code>/verify</code> — Verification checks on changes</div>
+      <div class="skill-item"><code>/tdd</code> — Test-driven development workflow</div>
+      <div class="skill-item"><code>/code-review</code> — Review recent changes</div>
+      <div class="skill-item"><code>/build-fix</code> — Auto-fix build errors</div>
+      <div class="skill-item"><code>/e2e</code> — Generate & run E2E tests</div>
+      <div class="skill-item"><code>/eval</code> — Evaluation harness</div>
+      <div class="skill-item"><code>/checkpoint</code> — Save work state</div>
+      <div class="skill-item"><code>/save-session</code> — Save session for later</div>
+      <div class="skill-item"><code>/resume-session</code> — Resume saved session</div>
+      <div class="skill-item"><code>/quality-gate</code> — Pre-merge quality checks</div>
+      <div class="skill-item"><code>/harness-audit</code> — Config audit</div>
+      <div class="skill-item"><code>/model-route</code> — Route by complexity</div>
+      <div class="skill-item"><code>/prompt-optimize</code> — Optimize prompts</div>
+      <div class="skill-item"><code>/loop-start</code> — Start autonomous loop</div>
+      <div class="skill-item"><code>/claw</code> — CLI multi-tool</div>
+    </div>
+  </div>
+
+  <!-- DATA CLASSIFICATION -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Data Classification Framework</h2>
+      <span class="badge badge-red">L1-L4</span>
+    </div>
+    <p class="desc">Defined by The Shield — enforced across all Aegis systems.</p>
+    <table class="table">
+      <tr><th>Level</th><th>Label</th><th>Storage</th><th>Transmission</th></tr>
+      <tr><td>L1</td><td>Public</td><td>Any</td><td>Any</td></tr>
+      <tr><td>L2</td><td>Internal</td><td>Encrypted at rest</td><td>TLS required</td></tr>
+      <tr><td>L3</td><td>Confidential</td><td>Encrypted, access-controlled</td><td>E2E encrypted</td></tr>
+      <tr><td>L4</td><td>Sovereign</td><td>Encrypted, air-gapped backup</td><td>Never cloud; local only</td></tr>
+    </table>
+  </div>
+
+  <!-- INSTALLATION SUMMARY -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Installation Summary</h2>
+      <span class="badge badge-green">All Green</span>
+    </div>
+    <table class="table">
+      <tr><th>Package</th><th>Version</th><th>Source</th><th>Config Delta</th><th>Status</th></tr>
+      <tr><td><code>ecc-agentshield</code></td><td>1.4.0</td><td><a href="https://ecc.tools">ecc.tools</a></td><td>+0.00 MB</td><td><span class="badge badge-green">PASS</span></td></tr>
+      <tr><td><code>superpowers</code></td><td>0.0.2</td><td>npm registry</td><td>+0.00 MB</td><td><span class="badge badge-green">PASS</span></td></tr>
+      <tr><td><code>ecc-universal</code></td><td>1.10.0</td><td><a href="https://ecc.tools/skills">ecc.tools/skills</a></td><td>+0.00 MB</td><td><span class="badge badge-green">PASS</span></td></tr>
+    </table>
+    <p style="margin-top: 1rem; color: var(--muted); font-size: 0.82rem;">
+      All packages installed globally via npm. Config folder unchanged at 48.58 MB.
+      Watchdog: GREEN. Backups: 3/3 saved. OpenCode: stable. Council: 10/10 loaded.
+    </p>
+  </div>
+
+  <!-- SYSTEM PATHS -->
+  <div class="card">
+    <div class="card-header">
+      <h2>System Paths Reference</h2>
+      <span class="badge badge-blue">Infrastructure</span>
+    </div>
+    <table class="table">
+      <tr><th>Path</th><th>Purpose</th><th>Access</th></tr>
+      <tr><td><code>O:\Apex_Aegis\</code></td><td>Source of Truth — Council, Governance, APRE</td><td>Read-only</td></tr>
+      <tr><td><code>O:\Apex_Aegis\Council\</code></td><td>Council roles, governance charter, decision flow</td><td>Read-only</td></tr>
+      <tr><td><code>C:\Aegis_System\Config\OpenCode\</code></td><td>OpenCode configuration</td><td>Write (guarded)</td></tr>
+      <tr><td><code>C:\Aegis_System\Projects\aegis\</code></td><td>Project files, AGENTS.md, reports</td><td>Write</td></tr>
+      <tr><td><code>C:\Aegis_System\Recovery\scripts\</code></td><td>Watchdog, backup, recovery scripts</td><td>Write</td></tr>
+      <tr><td><code>C:\Aegis_System\Logs\</code></td><td>Watchdog and system logs</td><td>Write</td></tr>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>
