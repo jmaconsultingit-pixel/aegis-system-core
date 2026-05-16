@@ -31,6 +31,15 @@ Aegis Sentinel architecture. Priority: data preservation, local-first, stable re
 - OpenSpace skills registry: C:\Aegis_System\Tools\OpenSpace\Experience\skills.
 - Do NOT allow OpenSpace to write to $env:USERPROFILE\.config\opencode.
 
+## ECC Execution Rule (Mandatory)
+
+For all complex tasks in OpenCode:
+1. Start with `/plan`
+2. Before implementation: `/tdd`
+3. After implementation: `/verify`
+4. For system/config changes: `/security-review`
+5. For multi-step tasks: `/checkpoint` after each step
+
 ## Directory Rules
 - Config: C:\Aegis_System\Config\OpenCode\
 - Projects: C:\Aegis_System\Projects\aegis\
