@@ -23,6 +23,14 @@ Aegis Sentinel architecture. Priority: data preservation, local-first, stable re
 - If OpenCode fails to launch, do not reinstall over corrupted state.
 - Restore from C:\Aegis_System\Config\OpenCode\backups\ instead.
 
+## Tools
+### OpenSpace (Skill Evolution Engine)
+- OpenSpace is authorized to track session trajectories to evolve skills.
+- All evolved skill files (.FIX / .DERIVED / .CAPTURED) MUST be stored in C:\Aegis_System\Tools\OpenSpace\Experience.
+- OpenSpace workspace: C:\Aegis_System\Tools\OpenSpace\Experience\.openspace.
+- OpenSpace skills registry: C:\Aegis_System\Tools\OpenSpace\Experience\skills.
+- Do NOT allow OpenSpace to write to $env:USERPROFILE\.config\opencode.
+
 ## Directory Rules
 - Config: C:\Aegis_System\Config\OpenCode\
 - Projects: C:\Aegis_System\Projects\aegis\
