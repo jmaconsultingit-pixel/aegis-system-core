@@ -184,7 +184,7 @@
 <div class="container">
 
   <h1>AEGIS Sentinel — Full System Inventory</h1>
-  <p class="subtitle">Phase 8 Installation + Phase 9 Council Re-Initialization · Rebuild #3 Final · May 16, 2026</p>
+  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace · Rebuild #3 Final · May 16, 2026</p>
 
   <!-- COUNCIL LOAD REPORT -->
   <div class="load-report">
@@ -201,7 +201,7 @@
   </div>
 
   <div class="summary">
-    <div class="stat"><div class="num">3</div><div class="label">Packages Installed</div></div>
+    <div class="stat"><div class="num">4</div><div class="label">Packages Installed</div></div>
     <div class="stat"><div class="num">10</div><div class="label">Council Members</div></div>
     <div class="stat"><div class="num">91</div><div class="label">Skills Loaded</div></div>
     <div class="stat"><div class="num">48</div><div class="label">Commands Available</div></div>
@@ -430,6 +430,28 @@
     </div>
   </div>
 
+  <!-- TOOL 4: OpenSpace -->
+  <div class="card">
+    <div class="card-header">
+      <h2>OpenSpace — Skill Evolution Engine</h2>
+      <span class="badge badge-green">Phase 11.1</span>
+    </div>
+    <div class="source">
+      Source: <a href="https://github.com/HKUDS/OpenSpace">HKUDS/OpenSpace</a> · v0.1.0 · 6.2k stars · pip: <code>openspace==0.1.0</code>
+    </div>
+    <p class="desc">
+      Self-evolving skill engine that makes agents smarter over time. Watches session trajectories, auto-fixes broken skills, and derives improved versions from successful patterns. All execution sandboxed with zero config footprint.
+    </p>
+    <table class="table">
+      <tr><th>Capability</th><th>Detail</th></tr>
+      <tr><td>Self-Evolution</td><td>Auto-fix broken skills (.FIX), derive improvements (.DERIVED), capture patterns (.CAPTURED)</td></tr>
+      <tr><td>Trajectory Tracking</td><td>Records session histories (traj.jsonl, agent_actions.jsonl) for analysis</td></tr>
+      <tr><td>LLM Backend</td><td>NVIDIA NIM (llama-3.1-8b-instruct) — free tier, local-compatible</td></tr>
+      <tr><td>Sandboxed Storage</td><td>C:\Aegis_System\Tools\OpenSpace\Experience\ — isolated from config</td></tr>
+      <tr><td>Config Safety</td><td>0 MB config drift — never touches OpenCode config</td></tr>
+    </table>
+  </div>
+
   <!-- DATA CLASSIFICATION -->
   <div class="card">
     <div class="card-header">
@@ -457,6 +479,7 @@
       <tr><td><code>ecc-agentshield</code></td><td>1.4.0</td><td><a href="https://ecc.tools">ecc.tools</a></td><td>+0.00 MB</td><td><span class="badge badge-green">PASS</span></td></tr>
       <tr><td><code>superpowers</code></td><td>0.0.2</td><td>npm registry</td><td>+0.00 MB</td><td><span class="badge badge-green">PASS</span></td></tr>
       <tr><td><code>ecc-universal</code></td><td>1.10.0</td><td><a href="https://ecc.tools/skills">ecc.tools/skills</a></td><td>+0.00 MB</td><td><span class="badge badge-green">PASS</span></td></tr>
+      <tr><td><code>openspace</code></td><td>0.1.0</td><td><a href="https://github.com/HKUDS/OpenSpace">HKUDS/OpenSpace</a></td><td>+0.00 MB</td><td><span class="badge badge-green">PASS</span></td></tr>
     </table>
     <p style="margin-top: 1rem; color: var(--muted); font-size: 0.82rem;">
       All packages installed globally via npm. Config folder unchanged at 48.58 MB.
@@ -478,6 +501,8 @@
       <tr><td><code>C:\Aegis_System\Projects\aegis\</code></td><td>Project files, AGENTS.md, reports</td><td>Write</td></tr>
       <tr><td><code>C:\Aegis_System\Recovery\scripts\</code></td><td>Watchdog, backup, recovery scripts</td><td>Write</td></tr>
       <tr><td><code>C:\Aegis_System\Logs\</code></td><td>Watchdog and system logs</td><td>Write</td></tr>
+      <tr><td><code>C:\Aegis_System\Tools\OpenSpace\Experience\</code></td><td>OpenSpace sandbox — trajectories, skills, .openspace</td><td>Write</td></tr>
+      <tr><td><code>C:\Aegis_System\Tools\OpenSpace\repo\</code></td><td>OpenSpace source (HKUDS/OpenSpace clone)</td><td>Read-only</td></tr>
     </table>
   </div>
 
