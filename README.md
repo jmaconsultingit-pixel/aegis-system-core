@@ -1,6 +1,6 @@
 # AEGIS Sentinel — Full System Inventory
 
-**Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring · Rebuild #4 · May 17, 2026**
+**Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge · Rebuild #4 · May 17, 2026**
 
 ---
 
@@ -14,7 +14,7 @@
 | **GitHub Remote** | CONNECTED |
 | **Repository** | [jmaconsultingit-pixel/aegis-system-core](https://github.com/jmaconsultingit-pixel/aegis-system-core) |
 | **Remote Branch** | `main` (tracking `origin/main`) |
-| **Last Commit** | AEGIS REBUILD #4: COUNCIL AGENTS DEPLOYED |
+| **Last Commit** | AEGIS REBUILD #4: N8N BRIDGE MCP SERVER DEPLOYED |
 | **System State** | LOCKED — All operations verified |
 | **Config Size** | 48.75 MB (+0.17 MB drift) — GREEN |
 
@@ -23,8 +23,8 @@
 - Council agents deployed: 11 / 11
 - Council skills deployed: 12 / 12
 - Aegis plugins deployed: 4 / 4
-- MCP servers wired: 4 / 4
-- MCP transport: local stdio (zero network)
+- MCP servers wired: 5 / 5
+- MCP transport: local stdio (n8n bridge uses network to Node .248)
 - AGENTS.md injected: 344 lines
 - Golden config synced: PARITY VERIFIED
 - opencode.jsonc updated: instructions + skills + plugins + mcp
@@ -43,7 +43,7 @@
 
 ## MCP Servers — Wired to OpenCode
 
-Location: `opencode.jsonc` `mcp` block · Transport: local stdio
+Location: `opencode.jsonc` `mcp` block · Transport: local stdio (n8n bridge uses network to Node .248)
 
 | Server | Type | Command | Timeout | Status |
 |--------|------|---------|---------|--------|
@@ -51,12 +51,17 @@ Location: `opencode.jsonc` `mcp` block · Transport: local stdio
 | **OpenSpace** | local stdio | `python -m openspace.mcp_server` | 120s | WIRED |
 | **TrendShift RSS** | local stdio | `python rss_mcp_server.py` | 15s | WIRED |
 | **TrendShift HF** | local stdio | `python hf_mcp_server.py` | 15s | WIRED |
+| **AEGIS n8n Bridge** | local stdio | `python mcp_server.py` | 120s | WIRED |
 
 **MCP tools available:**
 - **Gmail:** Email read, send, search, labels, attachments (OAuth)
 - **OpenSpace:** `execute_task`, `search_skills`, `fix_skill`, `upload_skill`
 - **TrendShift RSS:** `fetch_rss_feed(url, limit)` — structured feed data
 - **TrendShift HF:** `get_trending_models(limit, task)` — HuggingFace trends
+- **AEGIS n8n Bridge:** `n8n_list_workflows`, `n8n_execute_workflow(id, data)`, `n8n_get_execution(id)` — bridges OpenCode to n8n workflows on Node .248
+  - **L1-L4 Bouncer:** Injects `classification_level` and `allowed_storage` into every workflow payload. Enforces data sovereignty by blocking L3+ data from cloud-enabled workflows. Workflow allowlist validates target workflow against `n8n-webhook-allowlist.json` before execution.
+
+`n8n-webhook-allowlist.json` is stored on the NAS (`\\[NODE_220_TS]\Obsidian_Vault\Apex_Aegis\Config\`) alongside `.env` for centralized credential management.
 
 ## Council Agents — Deployed to OpenCode
 
@@ -159,6 +164,7 @@ Validates all complex and high-impact actions through multi-role evaluation. Cro
 | `~/.config/opencode/skills/` | 12 council skills (apre-review, council-vote, etc.) | Write (guarded) |
 | `~/.config/opencode/plugins/` | 4 aegis plugins (memory, apre-gate, fallback, vault-sync) | Write (guarded) |
 | `~/.config/opencode/trendshift/` | TrendShift MCP servers (RSS + HuggingFace) | Write (guarded) |
+| `~/.config/opencode/mcp-servers/` | AEGIS n8n Bridge MCP server (L1-L4 bouncer) | Write (guarded) |
 | `C:\Aegis_System\Config\OpenCode\golden\` | Golden config — source of truth for config state | Write (guarded) |
 | `C:\Aegis_System\Config\OpenCode\backups\` | Timestamped pre-change snapshots | Write (guarded) |
 | `C:\Aegis_System\Projects\aegis\` | Project files, AGENTS.md, reports | Write |

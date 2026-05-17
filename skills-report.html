@@ -233,7 +233,7 @@
 <div class="container">
 
   <h1>AEGIS Sentinel — Full System Inventory</h1>
-  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring · Rebuild #4 · May 17, 2026</p>
+  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge · Rebuild #4 · May 17, 2026</p>
 
   <!-- CHANGELOG -->
   <div class="card" style="border-color: var(--accent);">
@@ -260,6 +260,26 @@
             <li><span class="cl-tag cl-tag-changed">CHANGED</span> TrendShift MCP files deployed — <code>rss_mcp_server.py</code> + <code>hf_mcp_server.py</code> copied from NAS to <code>~\.config\opencode\trendshift\</code></li>
             <li><span class="cl-tag cl-tag-changed">CHANGED</span> OpenSpace entry point — using <code>python -m</code> instead of missing <code>openspace-mcp</code> script (pip editable install didn't generate console scripts)</li>
             <li><span class="cl-tag cl-tag-fixed">FIXED</span> OntarioTenders MCP — server.py not found at documented path; pipeline still runs via Task Scheduler (not MCP)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- v4.2 - May 17 -->
+      <div class="cl-entry">
+        <div class="cl-version"><span class="badge badge-cyan">v4.2</span></div>
+        <div class="cl-body">
+          <div class="cl-header">
+            <span class="cl-date">2026-05-17</span>
+            <span class="cl-phase">n8n Bridge — MCP Server Deployed</span>
+          </div>
+          <ul class="cl-list">
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>aegis-n8n-bridge</code> MCP server — Node.js stdio bridge between OpenCode and n8n (Node .248) via Tailscale</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>trigger_n8n_webhook</code> tool — allows council agents to fire n8n workflows with L1-L4 data classification enforcement</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>n8n-webhook-allowlist.json</code> on NAS — Shield-approved whitelist with per-webhook max classification levels</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Webhook bouncer logic — MCP server rejects payloads above webhook clearance before data crosses Tailscale</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> npm audit passed — 0 vulnerabilities for <code>@modelcontextprotocol/sdk</code> + <code>dotenv</code></li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> 5 webhooks allow-listed: test-bridge, slack-alert, catalyst-daily-log, titan-macro-review, chancellor-finance-sync</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> opencode.jsonc <code>mcp</code> block — now 5 servers (added aegis-n8n-bridge, 60s timeout)</li>
           </ul>
         </div>
       </div>
@@ -339,8 +359,9 @@
     <div class="status-line"><span class="status-label">Council agents deployed</span><span class="status-value" style="color: var(--green);">11 / 11</span></div>
     <div class="status-line"><span class="status-label">Council skills deployed</span><span class="status-value" style="color: var(--green);">12 / 12</span></div>
     <div class="status-line"><span class="status-label">Aegis plugins deployed</span><span class="status-value" style="color: var(--green);">4 / 4</span></div>
-    <div class="status-line"><span class="status-label">MCP servers wired</span><span class="status-value" style="color: var(--green);">4 / 4</span></div>
-    <div class="status-line"><span class="status-label">MCP transport</span><span class="status-value" style="color: var(--cyan);">local stdio (zero network)</span></div>
+    <div class="status-line"><span class="status-label">MCP servers wired</span><span class="status-value" style="color: var(--green);">5 / 5</span></div>
+    <div class="status-line"><span class="status-label">n8n bridge status</span><span class="status-value" style="color: var(--green);">DEPLOYED (Tailscale:[NODE_248_TS]:5678)</span></div>
+    <div class="status-line"><span class="status-label">npm audit</span><span class="status-value" style="color: var(--green);">0 vulnerabilities</span></div>
     <div class="status-line"><span class="status-label">AGENTS.md injected</span><span class="status-value" style="color: var(--green);">344 lines</span></div>
     <div class="status-line"><span class="status-label">Golden config synced</span><span class="status-value" style="color: var(--green);">PARITY VERIFIED</span></div>
     <div class="status-line"><span class="status-label">opencode.jsonc updated</span><span class="status-value" style="color: var(--green);">instructions + skills + plugins + mcp</span></div>
@@ -354,6 +375,7 @@
     <div class="stat"><div class="num">11</div><div class="label">Council Agents</div></div>
     <div class="stat"><div class="num">103</div><div class="label">Skills Loaded</div></div>
     <div class="stat"><div class="num">48</div><div class="label">Commands Available</div></div>
+    <div class="stat"><div class="num">5</div><div class="label">MCP Servers</div></div>
   </div>
 
   <!-- BACKUP & REMOTE STATUS -->
@@ -523,6 +545,33 @@
       <div class="skill-item"><strong>journal-entry</strong> — Double-entry bookkeeping preparation</div>
       <div class="skill-item"><strong>compliance-monitoring</strong> — CRA + PIPEDA + corporate governance</div>
     </div>
+  </div>
+
+  <!-- N8N BRIDGE MCP SERVER -->
+  <div class="card">
+    <div class="card-header">
+      <h2>n8n Bridge — MCP Server</h2>
+      <span class="badge badge-green">Phase 14 Deployed</span>
+    </div>
+    <div class="source">
+      Location: <code>C:\Aegis_System\Config\OpenCode\golden\...\mcp-servers\n8n-bridge\</code> · Allow-list: <code>O:\...\n8n-webhook-allowlist.json</code>
+    </div>
+    <p class="desc">
+      Node.js MCP server (local stdio) providing the <code>trigger_n8n_webhook</code> tool. Enables council agents to securely fire n8n workflows on Node .248 via Tailscale ([NODE_248_TS]:5678) with Shield-enforced L1-L4 data classification gating. API key read from Vault .env at runtime — never exposed to AI.
+    </p>
+    <table class="table">
+      <tr><th>Webhook</th><th>Max Level</th><th>Purpose</th></tr>
+      <tr><td><code>test-bridge</code></td><td><span class="badge badge-yellow">L2</span></td><td>Connectivity test — no sensitive data</td></tr>
+      <tr><td><code>slack-alert</code></td><td><span class="badge badge-yellow">L2</span></td><td>External cloud (Slack) — blocks L3/L4</td></tr>
+      <tr><td><code>catalyst-daily-log</code></td><td><span class="badge badge-green">L4</span></td><td>Local vault journal — all levels allowed</td></tr>
+      <tr><td><code>titan-macro-review</code></td><td><span class="badge badge-green">L4</span></td><td>Local macro pipeline — all levels allowed</td></tr>
+      <tr><td><code>chancellor-finance-sync</code></td><td><span class="badge badge-green">L4</span></td><td>Local financial DB — all levels allowed</td></tr>
+    </table>
+    <p style="margin-top: 1rem; color: var(--muted); font-size: 0.82rem;">
+      Dependencies: @modelcontextprotocol/sdk + dotenv · npm audit: 0 vulnerabilities.
+      Bouncer: rejects payloads exceeding webhook clearance before data crosses Tailscale.
+      Allow-list edit: open <code>n8n-webhook-allowlist.json</code> on NAS, change max_level or add webhook entries.
+    </p>
   </div>
 
   <!-- TOOL 1: AgentShield -->
