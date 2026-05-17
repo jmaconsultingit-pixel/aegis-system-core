@@ -1,6 +1,6 @@
-# AEGIS Sentinel — Full System Inventory
+# AEGIS Sentinel — Full System Inventory (Phase 15 n8n Auto-Healing)
 
-**Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge + Phase 15 The Forges · Rebuild #4 · May 17, 2026**
+**Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge + Phase 15 The Forges + Phase 15 n8n Auto-Healing · Rebuild #4 · May 17, 2026**
 
 ---
 
@@ -14,7 +14,7 @@
 | **GitHub Remote** | CONNECTED |
 | **Repository** | [jmaconsultingit-pixel/aegis-system-core](https://github.com/jmaconsultingit-pixel/aegis-system-core) |
 | **Remote Branch** | `main` (tracking `origin/main`) |
-| **Last Commit** | AEGIS REBUILD #4: N8N BRIDGE MCP SERVER DEPLOYED |
+| **Last Commit** | AEGIS REBUILD #4: N8N AUTO-HEALING + BRIDGE DEPLOYED |
 | **System State** | LOCKED — All operations verified |
 | **Config Size** | 48.75 MB (+0.17 MB drift) — GREEN |
 
@@ -63,6 +63,36 @@ Location: `opencode.jsonc` `mcp` block · Transport: local stdio (n8n bridge use
   - **L1-L4 Bouncer:** Injects `classification_level` and `allowed_storage` into every workflow payload. Enforces data sovereignty by blocking L3+ data from cloud-enabled workflows. Workflow allowlist validates target workflow against `n8n-webhook-allowlist.json` before execution.
 
 `n8n-webhook-allowlist.json` is stored on the NAS (`\\[NODE_220_TS]\Obsidian_Vault\Apex_Aegis\Config\`) alongside `.env` for centralized credential management.
+
+## n8n Auto-Healing — Phase 15 Deployment
+
+Node .248 n8n instance hardened against credential loss, OAuth breakage, and container failure.
+
+### Configuration Items
+
+| Item | Detail |
+|------|--------|
+| **Encryption Key** | `N8N_ENCRYPTION_KEY` added to Docker compose; key stored in Vault (`n8n-encryption-key.txt`) — L4, air-gapped |
+| **OAuth Routing** | `N8N_HOST=[NODE_248_TS]` + `N8N_PROTOCOL=http` env vars for Gmail OAuth callback routing via Tailscale |
+| **Code Node Access** | `NODE_FUNCTION_ALLOW_BUILTIN=fs,path` — allows Code node filesystem read/write |
+| **Auto-Restart** | `restart=unless-stopped` in compose — container auto-recovers on crash or Docker restart |
+| **DB Backup** | Daily database.sqlite backup at 03:00 via Windows Task Scheduler |
+| **Health Check** | Hourly n8n API health check via Task Scheduler |
+| **Cold Archives** | `database.sqlite` and WAL preserved on Node .248 for disaster recovery |
+
+### Disaster Recovery Procedure
+
+1. Confirm `N8N_ENCRYPTION_KEY` is available from Vault (`n8n-encryption-key.txt`)
+2. Restore `database.sqlite` from latest cold archive or daily backup
+3. `docker compose up -d` — credentials and workflows restored via encryption key
+
+### Fixes Applied
+
+| Issue | Resolution |
+|-------|------------|
+| Gmail OAuth redirect URI mismatch | Changed from `localhost` to Tailscale IP (`[NODE_248_TS]`) |
+| Module 'fs' disallowed in Code nodes | Added `NODE_FUNCTION_ALLOW_BUILTIN=fs,path` env var |
+| SMTP outbound | `jmaconsulting.it@gmail.com` confirmed working |
 
 ## Council Agents — Deployed to OpenCode
 
