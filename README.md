@@ -1,6 +1,6 @@
 # AEGIS Sentinel — Full System Inventory
 
-**Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge · Rebuild #4 · May 17, 2026**
+**Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge + Phase 15 The Forges · Rebuild #4 · May 17, 2026**
 
 ---
 
@@ -20,10 +20,11 @@
 
 ## AEGIS COUNCIL LOAD REPORT
 
-- Council agents deployed: 11 / 11
+- Council agents deployed: 14 / 14
 - Council skills deployed: 12 / 12
 - Aegis plugins deployed: 4 / 4
 - MCP servers wired: 5 / 5
+- SDLC Forges active: 3 / 3
 - MCP transport: local stdio (n8n bridge uses network to Node .248)
 - AGENTS.md injected: 344 lines
 - Golden config synced: PARITY VERIFIED
@@ -67,6 +68,8 @@ Location: `opencode.jsonc` `mcp` block · Transport: local stdio (n8n bridge use
 
 Location: `~/.config/opencode/agents/` · Config: `opencode.jsonc` · Golden: `C:\Aegis_System\Config\OpenCode\golden\`
 
+### High Council (Governance)
+
 | Agent | Mode | Domain | Authority |
 |-------|------|--------|-----------|
 | `@titan` | subagent | Macro Strategy, ROI, Wealth | High |
@@ -80,6 +83,16 @@ Location: `~/.config/opencode/agents/` · Config: `opencode.jsonc` · Golden: `C
 | `@oracle` | subagent | Trends, Signals, AI Future | Advisory-High |
 | `@sentinel-warden` | subagent | Physical Security, Hardware | Medium |
 | `@apre` | subagent | Peer Review Scoring Engine | Governance |
+
+### The Forges (SDLC Code Quality Pipeline)
+
+| Forge | Mode | Purpose | Tool Restrictions |
+|-------|------|---------|------------------|
+| `@code-reviewer` | subagent | Deep logic inspection, edge-case hunting, ECC standards | Read-only (Red Team) |
+| `@shield-gate` | subagent | Pre-commit L1-L4 classification, secrets scan, OWASP | Read-only (final gate) |
+| `@lore-scribe` | subagent | ADRs, READMEs, changelogs, design briefs | Write (docs only) |
+
+**SDLC Workflow:** Write code → `@code-reviewer` checks → `@shield-gate` clears → git commit → `@lore-scribe` documents
 
 ## Council Skills — Deployed to OpenCode
 

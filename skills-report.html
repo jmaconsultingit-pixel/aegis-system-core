@@ -233,7 +233,7 @@
 <div class="container">
 
   <h1>AEGIS Sentinel — Full System Inventory</h1>
-  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge · Rebuild #4 · May 17, 2026</p>
+  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge + Phase 15 The Forges + Phase 15 n8n Auto-Healing · Rebuild #4 · May 17, 2026</p>
 
   <!-- CHANGELOG -->
   <div class="card" style="border-color: var(--accent);">
@@ -244,6 +244,48 @@
     <p class="desc">Chronological record of notable system changes. Categories: <span class="badge badge-green">ADDED</span> <span class="badge badge-yellow" style="background:#1e3a5f;color:var(--accent);">CHANGED</span> <span class="badge badge-cyan" style="background:#7f1d1d;color:var(--orange);">FIXED</span> <span class="badge badge-red">REMOVED</span> <span class="badge badge-yellow">SECURITY</span> <span style="background:#581c87;color:var(--purple);" class="badge badge-purple">DEPRECATED</span></p>
 
     <div class="changelog">
+      <!-- v4.3 - May 17 -->
+      <div class="cl-entry">
+        <div class="cl-version"><span class="badge badge-cyan">v4.3</span></div>
+        <div class="cl-body">
+          <div class="cl-header">
+            <span class="cl-date">2026-05-17</span>
+            <span class="cl-phase">Phase 15 — n8n Auto-Healing Deployment</span>
+          </div>
+          <ul class="cl-list">
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>N8N_ENCRYPTION_KEY</code> to Docker compose (prevents credential loss on container recreate, key stored in Vault)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>N8N_HOST=[NODE_248_TS]</code> and <code>N8N_PROTOCOL=http</code> env vars for OAuth callback routing</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>NODE_FUNCTION_ALLOW_BUILTIN=fs,path</code> to allow Code node filesystem access</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Auto-healing: <code>restart=unless-stopped</code> in compose, daily DB backup (03:00 Task Scheduler), hourly health check</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Cold archives: <code>database.sqlite</code> and WAL preserved on Node .248</li>
+            <li><span class="cl-tag cl-tag-fixed">FIXED</span> Gmail OAuth redirect URI mismatch (was localhost, now Tailscale IP)</li>
+            <li><span class="cl-tag cl-tag-fixed">FIXED</span> Module 'fs' disallowed error in Code nodes</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> SMTP test passed — <code>jmaconsulting.it@gmail.com</code> outbound confirmed working</li>
+            <li><span class="cl-tag cl-tag-security">SECURITY</span> <code>N8N_ENCRYPTION_KEY</code> stored in Vault (<code>n8n-encryption-key.txt</code>) — L4, air-gapped</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- v4.2 - May 17 -->
+      <div class="cl-entry">
+        <div class="cl-version"><span class="badge badge-cyan">v4.2</span></div>
+        <div class="cl-body">
+          <div class="cl-header">
+            <span class="cl-date">2026-05-17</span>
+            <span class="cl-phase">Rebuild #4.2a — The Sovereign Forges (SDLC Pipeline)</span>
+          </div>
+          <ul class="cl-list">
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>@code-reviewer</code> forge — ECC-based deep logic inspection, edge-case hunting, anti-pattern detection (read-only gate, adapted from ECC code-reviewer v1.8)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>@shield-gate</code> forge — pre-commit security &amp; data classification checker (L1-L4 enforcement, secrets scan, OWASP, read-only)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>@lore-scribe</code> forge — documentation formatter (ADRs, READMEs, changelogs per Keep a Changelog standard, write-enabled for docs only)</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> Catalyst delegation table updated — 3 SDLC Forges wired with explicit workflow: Write → Review → Gate → Commit → Document</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> Total agents: 11 → 14 (10 Council + 1 Catalyst + 3 Forges)</li>
+            <li><span class="cl-tag cl-tag-security">SECURITY</span> Shield-gate enforces Red Team/Blue Team dynamic — code-reviewer and shield-gate are read-only, never modify code</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> APRE scored Rebuild #4.2a at 9.6/10 TIER 1 — governance validated before deployment</li>
+          </ul>
+        </div>
+      </div>
+
       <!-- v4.1 - May 17 -->
       <div class="cl-entry">
         <div class="cl-version"><span class="badge badge-cyan">v4.1</span></div>
@@ -372,7 +414,7 @@
 
   <div class="summary">
     <div class="stat"><div class="num">4</div><div class="label">Packages Installed</div></div>
-    <div class="stat"><div class="num">11</div><div class="label">Council Agents</div></div>
+    <div class="stat"><div class="num">14</div><div class="label">Council Agents</div></div>
     <div class="stat"><div class="num">103</div><div class="label">Skills Loaded</div></div>
     <div class="stat"><div class="num">48</div><div class="label">Commands Available</div></div>
     <div class="stat"><div class="num">5</div><div class="label">MCP Servers</div></div>
