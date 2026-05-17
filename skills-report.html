@@ -178,13 +178,160 @@
   .load-report .status-line:last-child { border-bottom: none; }
   .load-report .status-label { color: var(--muted); }
   .load-report .status-value { font-weight: 600; }
+
+  /* Changelog */
+  .changelog { margin-top: 0.5rem; }
+  .cl-entry { display: flex; gap: 1rem; margin-bottom: 0; position: relative; }
+  .cl-entry + .cl-entry { border-top: 1px solid var(--border); margin-top: 0; padding-top: 1.2rem; }
+  .cl-version { flex: 0 0 64px; text-align: center; padding-top: 0.2rem; }
+  .cl-body { flex: 1; min-width: 0; }
+  .cl-header { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.6rem; }
+  .cl-date { color: var(--muted); font-size: 0.78rem; font-weight: 600; }
+  .cl-phase { color: var(--cyan); font-size: 0.85rem; font-weight: 600; }
+  .cl-list { list-style: none; padding: 0; margin: 0; }
+  .cl-list li {
+    padding: 0.3rem 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .cl-tag {
+    display: inline-block;
+    padding: 0.08rem 0.45rem;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    min-width: 64px;
+    text-align: center;
+  }
+  .cl-tag-added    { background: #166534; color: var(--green); }
+  .cl-tag-changed  { background: #1e3a5f; color: var(--accent); }
+  .cl-tag-fixed    { background: #7f1d1d; color: var(--orange); }
+  .cl-tag-removed  { background: #7f1d1d; color: var(--red); }
+  .cl-tag-security { background: #713f12; color: var(--yellow); }
+  .cl-tag-deprecated { background: #581c87; color: var(--purple); }
+  .cl-list li code {
+    background: var(--bg);
+    padding: 0.05rem 0.3rem;
+    border-radius: 3px;
+    font-size: 0.78rem;
+    color: var(--cyan);
+  }
+  .cl-list li .badge {
+    vertical-align: middle;
+    margin: 0 0.15rem;
+  }
 </style>
 </head>
 <body>
 <div class="container">
 
   <h1>AEGIS Sentinel — Full System Inventory</h1>
-  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents · Rebuild #4 Final · May 17, 2026</p>
+  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring · Rebuild #4 · May 17, 2026</p>
+
+  <!-- CHANGELOG -->
+  <div class="card" style="border-color: var(--accent);">
+    <div class="card-header">
+      <h2>System Changelog</h2>
+      <span class="badge badge-blue">Rebuild #3 → #4</span>
+    </div>
+    <p class="desc">Chronological record of notable system changes. Categories: <span class="badge badge-green">ADDED</span> <span class="badge badge-yellow" style="background:#1e3a5f;color:var(--accent);">CHANGED</span> <span class="badge badge-cyan" style="background:#7f1d1d;color:var(--orange);">FIXED</span> <span class="badge badge-red">REMOVED</span> <span class="badge badge-yellow">SECURITY</span> <span style="background:#581c87;color:var(--purple);" class="badge badge-purple">DEPRECATED</span></p>
+
+    <div class="changelog">
+      <!-- v4.1 - May 17 -->
+      <div class="cl-entry">
+        <div class="cl-version"><span class="badge badge-cyan">v4.1</span></div>
+        <div class="cl-body">
+          <div class="cl-header">
+            <span class="cl-date">2026-05-17</span>
+            <span class="cl-phase">MCP Wiring — All Servers Connected</span>
+          </div>
+          <ul class="cl-list">
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Gmail MCP wired — <code>@shinzolabs/gmail-mcp@1.7.4</code> connected to OpenCode via <code>gmail-mcp.cmd</code> (OAuth healthy)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> OpenSpace MCP wired — <code>openspace==0.1.0</code> connected via <code>python -m openspace.mcp_server</code> (stdio transport, 120s timeout)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> TrendShift MCP wired — RSS + HuggingFace servers deployed from NAS and connected (15s timeout each)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>mcp</code> block added to <code>opencode.jsonc</code> — 4 servers, all local stdio, zero network exposure</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> TrendShift MCP files deployed — <code>rss_mcp_server.py</code> + <code>hf_mcp_server.py</code> copied from NAS to <code>~\.config\opencode\trendshift\</code></li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> OpenSpace entry point — using <code>python -m</code> instead of missing <code>openspace-mcp</code> script (pip editable install didn't generate console scripts)</li>
+            <li><span class="cl-tag cl-tag-fixed">FIXED</span> OntarioTenders MCP — server.py not found at documented path; pipeline still runs via Task Scheduler (not MCP)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- v4.0 - May 17 -->
+      <div class="cl-entry">
+        <div class="cl-version"><span class="badge badge-cyan">v4.0</span></div>
+        <div class="cl-body">
+          <div class="cl-header">
+            <span class="cl-date">2026-05-17</span>
+            <span class="cl-phase">Rebuild #4 — Council Agents Final</span>
+          </div>
+          <ul class="cl-list">
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Council Agent deployment — 11 agents callable via <code>@titan</code>, <code>@shield</code>, <code>@apre</code>, etc.</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Council Skills deployment — 12 skills (<code>apre-review</code>, <code>council-vote</code>, <code>tax-calendar</code>, etc.)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Aegis plugins — 4 plugins (<code>aegis-memory</code>, <code>apre-gate</code>, <code>model-fallback</code>, <code>vault-sync</code>)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> GitHub remote — <code>github.com/jmaconsultingit-pixel/aegis-system-core</code> (origin/main)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> OpenSpace v0.1.0 — self-evolving skill engine, sandboxed at <code>C:\Aegis_System\Tools\OpenSpace\</code></li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> <code>opencode.jsonc</code> — wired instructions + skills path + plugins path</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> <code>AGENTS.md</code> — expanded to 344 lines with full governance, network topology, Aegis rules</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> Config drift — golden config synced, parity verified (+0.17 MB, GREEN)</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> APRE score — Rebuild #4 scored 8.55/10 (TIER 1, all vetos PASS)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- v3.0 - May 16 -->
+      <div class="cl-entry">
+        <div class="cl-version"><span class="badge badge-cyan">v3.0</span></div>
+        <div class="cl-body">
+          <div class="cl-header">
+            <span class="cl-date">2026-05-16</span>
+            <span class="cl-phase">Rebuild #3 — Infrastructure Hardening</span>
+          </div>
+          <ul class="cl-list">
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>APEX_TECH_STACK.md</code> v2.0 — Node .170, Tailscale mesh, MCP architecture, config size monitoring</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>Aegis_Hardware_Manifest.md</code> — updated with .170 topology, local execution paths</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Watchdog script — <code>C:\Aegis_System\Recovery\scripts\watchdog.ps1</code> (50 MB Red Zone monitor)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Backup protocol — timestamped robocopy mirrors + golden snapshots at <code>C:\Aegis_System\Config\OpenCode\</code></li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>ecc-agentshield@1.4.0</code> — 102 security rules, 1,282 tests (npm global)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>ecc-universal@1.10.0</code> — 91 skills, 18 agents, 48 commands (npm global)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>superpowers@0.0.2</code> — workflow automation framework (npm global)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>@shinzolabs/gmail-mcp@1.7.4</code> — Gmail MCP server (npm global, pending wiring)</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> Config baseline — measured at 48.58 MB, Yellow Zone set at +20 MB</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> Node .220 — marked OFFLINE across all docs, inference migrated to .170 CPU fallback</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> Ollama runtime — routed to <code>http://127.0.0.1:11434</code> on .170 (qwen2.5:1.5b, deepseek-coder:1.3b)</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> MCP architecture decision — all servers run local stdio on .170 (zero network exposure)</li>
+            <li><span class="cl-tag cl-tag-fixed">FIXED</span> n8n endpoint — verified reachable via LAN ([NODE_248]:5678), Tailscale routing pending fix</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- v2.0 - Feb 9 -->
+      <div class="cl-entry">
+        <div class="cl-version"><span class="badge badge-cyan">v2.0</span></div>
+        <div class="cl-body">
+          <div class="cl-header">
+            <span class="cl-date">2026-02-09</span>
+            <span class="cl-phase">Initial Aegis Infrastructure</span>
+          </div>
+          <ul class="cl-list">
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Original <code>APEX_TECH_STACK.md</code> v1.0 — Node .220, .248, NAS topology</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Council governance — 10 roles, charter, decision flow</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> APRE review engine — scoring protocol, veto checks</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> L1-L4 data classification framework</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Pi-hole DNS on Node .248, Docker containers</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> Migration from Claude Code to OpenCode as primary agent harness</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- COUNCIL LOAD REPORT -->
   <div class="load-report">
@@ -192,9 +339,11 @@
     <div class="status-line"><span class="status-label">Council agents deployed</span><span class="status-value" style="color: var(--green);">11 / 11</span></div>
     <div class="status-line"><span class="status-label">Council skills deployed</span><span class="status-value" style="color: var(--green);">12 / 12</span></div>
     <div class="status-line"><span class="status-label">Aegis plugins deployed</span><span class="status-value" style="color: var(--green);">4 / 4</span></div>
+    <div class="status-line"><span class="status-label">MCP servers wired</span><span class="status-value" style="color: var(--green);">4 / 4</span></div>
+    <div class="status-line"><span class="status-label">MCP transport</span><span class="status-value" style="color: var(--cyan);">local stdio (zero network)</span></div>
     <div class="status-line"><span class="status-label">AGENTS.md injected</span><span class="status-value" style="color: var(--green);">344 lines</span></div>
     <div class="status-line"><span class="status-label">Golden config synced</span><span class="status-value" style="color: var(--green);">PARITY VERIFIED</span></div>
-    <div class="status-line"><span class="status-label">opencode.jsonc updated</span><span class="status-value" style="color: var(--green);">instructions + skills + plugins</span></div>
+    <div class="status-line"><span class="status-label">opencode.jsonc updated</span><span class="status-value" style="color: var(--green);">instructions + skills + plugins + mcp</span></div>
     <div class="status-line"><span class="status-label">Config drift</span><span class="status-value" style="color: var(--green);">+0.17 MB (GREEN)</span></div>
     <div class="status-line"><span class="status-label">APRE review score</span><span class="status-value" style="color: var(--green);">8.55 / 10 — TIER 1</span></div>
     <div class="status-line"><span class="status-label">Veto check</span><span class="status-value" style="color: var(--green);">ALL PASS</span></div>

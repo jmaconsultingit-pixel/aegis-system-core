@@ -1,6 +1,6 @@
 # AEGIS Sentinel — Full System Inventory
 
-**Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents · Rebuild #4 Final · May 17, 2026**
+**Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring · Rebuild #4 · May 17, 2026**
 
 ---
 
@@ -23,9 +23,11 @@
 - Council agents deployed: 11 / 11
 - Council skills deployed: 12 / 12
 - Aegis plugins deployed: 4 / 4
+- MCP servers wired: 4 / 4
+- MCP transport: local stdio (zero network)
 - AGENTS.md injected: 344 lines
 - Golden config synced: PARITY VERIFIED
-- opencode.jsonc updated: instructions + skills + plugins
+- opencode.jsonc updated: instructions + skills + plugins + mcp
 - Config drift: +0.17 MB (GREEN)
 - APRE review score: 8.55 / 10 — TIER 1
 - Veto check: ALL PASS
@@ -38,6 +40,23 @@
 | `superpowers` | 0.0.2 | npm registry | PASS |
 | `ecc-universal` | 1.10.0 | [ecc.tools/skills](https://ecc.tools/skills) | PASS |
 | `openspace` | 0.1.0 | [HKUDS/OpenSpace](https://github.com/HKUDS/OpenSpace) | PASS |
+
+## MCP Servers — Wired to OpenCode
+
+Location: `opencode.jsonc` `mcp` block · Transport: local stdio
+
+| Server | Type | Command | Timeout | Status |
+|--------|------|---------|---------|--------|
+| **Gmail** | local stdio | `gmail-mcp.cmd` | 30s | WIRED |
+| **OpenSpace** | local stdio | `python -m openspace.mcp_server` | 120s | WIRED |
+| **TrendShift RSS** | local stdio | `python rss_mcp_server.py` | 15s | WIRED |
+| **TrendShift HF** | local stdio | `python hf_mcp_server.py` | 15s | WIRED |
+
+**MCP tools available:**
+- **Gmail:** Email read, send, search, labels, attachments (OAuth)
+- **OpenSpace:** `execute_task`, `search_skills`, `fix_skill`, `upload_skill`
+- **TrendShift RSS:** `fetch_rss_feed(url, limit)` — structured feed data
+- **TrendShift HF:** `get_trending_models(limit, task)` — HuggingFace trends
 
 ## Council Agents — Deployed to OpenCode
 
@@ -139,6 +158,7 @@ Validates all complex and high-impact actions through multi-role evaluation. Cro
 | `~/.config/opencode/agents/` | 11 council agents (@titan, @shield, @apre, etc.) | Write (guarded) |
 | `~/.config/opencode/skills/` | 12 council skills (apre-review, council-vote, etc.) | Write (guarded) |
 | `~/.config/opencode/plugins/` | 4 aegis plugins (memory, apre-gate, fallback, vault-sync) | Write (guarded) |
+| `~/.config/opencode/trendshift/` | TrendShift MCP servers (RSS + HuggingFace) | Write (guarded) |
 | `C:\Aegis_System\Config\OpenCode\golden\` | Golden config — source of truth for config state | Write (guarded) |
 | `C:\Aegis_System\Config\OpenCode\backups\` | Timestamped pre-change snapshots | Write (guarded) |
 | `C:\Aegis_System\Projects\aegis\` | Project files, AGENTS.md, reports | Write |
