@@ -184,26 +184,26 @@
 <div class="container">
 
   <h1>AEGIS Sentinel — Full System Inventory</h1>
-  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace · Rebuild #3 Final · May 16, 2026</p>
+  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents · Rebuild #4 Final · May 17, 2026</p>
 
   <!-- COUNCIL LOAD REPORT -->
   <div class="load-report">
-    <h3>AEGIS COUNCIL LOAD REPORT</h3>
-    <div class="status-line"><span class="status-label">Files discovered (O:\Apex_Aegis\)</span><span class="status-value" style="color: var(--cyan);">46</span></div>
-    <div class="status-line"><span class="status-label">Council files</span><span class="status-value" style="color: var(--green);">36</span></div>
-    <div class="status-line"><span class="status-label">Governance files</span><span class="status-value" style="color: var(--green);">9</span></div>
-    <div class="status-line"><span class="status-label">APRE reports</span><span class="status-value" style="color: var(--green);">1</span></div>
-    <div class="status-line"><span class="status-label">Council roles loaded</span><span class="status-value" style="color: var(--green);">10 / 10</span></div>
-    <div class="status-line"><span class="status-label">Governance file</span><span class="status-value" style="color: var(--green);">FOUND</span></div>
-    <div class="status-line"><span class="status-label">APRE / Peer Review</span><span class="status-value" style="color: var(--green);">FOUND</span></div>
-    <div class="status-line"><span class="status-label">Council role definitions</span><span class="status-value" style="color: var(--green);">FOUND</span></div>
-    <div class="status-line"><span class="status-label">Risk assessment</span><span class="status-value" style="color: var(--green);">LOW (complete coverage)</span></div>
+    <h3>AEGIS COUNCIL LOAD REPORT — Rebuild #4</h3>
+    <div class="status-line"><span class="status-label">Council agents deployed</span><span class="status-value" style="color: var(--green);">11 / 11</span></div>
+    <div class="status-line"><span class="status-label">Council skills deployed</span><span class="status-value" style="color: var(--green);">12 / 12</span></div>
+    <div class="status-line"><span class="status-label">Aegis plugins deployed</span><span class="status-value" style="color: var(--green);">4 / 4</span></div>
+    <div class="status-line"><span class="status-label">AGENTS.md injected</span><span class="status-value" style="color: var(--green);">344 lines</span></div>
+    <div class="status-line"><span class="status-label">Golden config synced</span><span class="status-value" style="color: var(--green);">PARITY VERIFIED</span></div>
+    <div class="status-line"><span class="status-label">opencode.jsonc updated</span><span class="status-value" style="color: var(--green);">instructions + skills + plugins</span></div>
+    <div class="status-line"><span class="status-label">Config drift</span><span class="status-value" style="color: var(--green);">+0.17 MB (GREEN)</span></div>
+    <div class="status-line"><span class="status-label">APRE review score</span><span class="status-value" style="color: var(--green);">8.55 / 10 — TIER 1</span></div>
+    <div class="status-line"><span class="status-label">Veto check</span><span class="status-value" style="color: var(--green);">ALL PASS</span></div>
   </div>
 
   <div class="summary">
     <div class="stat"><div class="num">4</div><div class="label">Packages Installed</div></div>
-    <div class="stat"><div class="num">10</div><div class="label">Council Members</div></div>
-    <div class="stat"><div class="num">91</div><div class="label">Skills Loaded</div></div>
+    <div class="stat"><div class="num">11</div><div class="label">Council Agents</div></div>
+    <div class="stat"><div class="num">103</div><div class="label">Skills Loaded</div></div>
     <div class="stat"><div class="num">48</div><div class="label">Commands Available</div></div>
   </div>
 
@@ -216,7 +216,7 @@
     <div class="status-line"><span class="status-label">GitHub Remote</span><span class="status-value" style="color: var(--green);">CONNECTED</span></div>
     <div class="status-line"><span class="status-label">Repository</span><span class="status-value" style="color: var(--accent);">github.com/jmaconsultingit-pixel/aegis-system-core</span></div>
     <div class="status-line"><span class="status-label">Remote Branch</span><span class="status-value" style="color: var(--green);">main (tracking origin/main)</span></div>
-    <div class="status-line"><span class="status-label">Last Commit</span><span class="status-value" style="color: var(--cyan);">AEGIS REBUILD #3: COMPLETE</span></div>
+    <div class="status-line"><span class="status-label">Last Commit</span><span class="status-value" style="color: var(--cyan);">AEGIS REBUILD #4: COUNCIL AGENTS DEPLOYED</span></div>
     <div class="status-line"><span class="status-label">System State</span><span class="status-value" style="color: var(--green);">LOCKED — All operations verified</span></div>
   </div>
 
@@ -227,10 +227,10 @@
       <span class="badge badge-purple">Source of Truth</span>
     </div>
     <div class="source">
-      Location: <code>O:\Apex_Aegis\Council\</code> · Governance: <code>Council_Governance_Charter.md</code> v3.1
+      Location: <code>O:\Apex_Aegis\Council\</code> (source) · Agents: <code>~/.config/opencode/agents/</code> (deployed) · Governance: <code>Council_Governance_Charter.md</code> v3.1
     </div>
     <p class="desc">
-      The Aegis High Council provides specialized intelligence across all strategic and tactical domains. The Sentinel (Operator) is the sole source of authority — no Council member executes actions that violate Local Sovereignty, Data Privacy, or Jurisdictional Defense.
+      The Aegis High Council provides specialized intelligence across all strategic and tactical domains. Council members are deployed as opencode subagents — callable via <code>@titan</code>, <code>@shield</code>, <code>@apre</code>, etc. The Sentinel (Operator) is the sole source of authority — no Council member executes actions that violate Local Sovereignty, Data Privacy, or Jurisdictional Defense.
     </p>
 
     <div class="council-grid">
@@ -304,19 +304,76 @@
       <span class="badge badge-yellow">Validation Layer</span>
     </div>
     <div class="source">
-      Location: <code>O:\Apex_Aegis\logs\apre_reports\</code> · Script: <code>O:\Apex_Aegis\scripts\run_apre.py</code>
+      Location: <code>O:\Apex_Aegis\logs\apre_reports\</code> · Agent: <code>~/.config/opencode/agents/apre.md</code> · Skill: <code>~/.config/opencode/skills/apre-review/SKILL.md</code>
     </div>
     <p class="desc">
-      The Aegis Peer Review Engine validates all complex and high-impact actions through multi-role evaluation. Cross-checks decisions for risk, scalability, and integrity before execution.
+      The Aegis Peer Review Engine validates all complex and high-impact actions through multi-role evaluation. Cross-checks decisions for risk, scalability, and integrity before execution. Deployed as both an opencode subagent (<code>@apre</code>) and a skill (<code>/apre-review</code>).
     </p>
     <table class="table">
       <tr><th>Component</th><th>Location</th><th>Status</th></tr>
+      <tr><td>APRE Agent</td><td><code>~/.config/opencode/agents/apre.md</code></td><td><span class="badge badge-green">DEPLOYED</span></td></tr>
+      <tr><td>APRE Skill</td><td><code>~/.config/opencode/skills/apre-review/SKILL.md</code></td><td><span class="badge badge-green">DEPLOYED</span></td></tr>
       <tr><td>APRE Audit Report</td><td><code>O:\Apex_Aegis\Council\Council_APRE_Audit.md</code></td><td><span class="badge badge-green">FOUND</span></td></tr>
       <tr><td>APRE Build v2</td><td><code>O:\Apex_Aegis\Council\APRE_Audit_Build_v2.md</code></td><td><span class="badge badge-green">FOUND</span></td></tr>
       <tr><td>APRE Score (Skills)</td><td><code>O:\Apex_Aegis\Council\APRE_Score_Skills_MD_2026-05-15.md</code></td><td><span class="badge badge-green">FOUND</span></td></tr>
-      <tr><td>APRE Runner Script</td><td><code>O:\Apex_Aegis\scripts\run_apre.py</code></td><td><span class="badge badge-green">FOUND</span></td></tr>
-      <tr><td>APRE Report Log</td><td><code>O:\Apex_Aegis\logs\apre_reports\</code></td><td><span class="badge badge-green">FOUND</span></td></tr>
+      <tr><td>APRE Rebuild #4 Score</td><td><code>8.55 / 10 — TIER 1</code></td><td><span class="badge badge-green">AUTO-PROCEED</span></td></tr>
     </table>
+  </div>
+
+  <!-- COUNCIL AGENTS DEPLOYMENT -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Council Agents — Deployed to OpenCode</h2>
+      <span class="badge badge-green">Phase 12 Complete</span>
+    </div>
+    <div class="source">
+      Location: <code>~/.config/opencode/agents/</code> · Config: <code>opencode.jsonc</code> · Golden: <code>C:\Aegis_System\Config\OpenCode\golden\</code>
+    </div>
+    <p class="desc">
+      11 council members deployed as opencode subagents. Each callable via <code>@name</code> in opencode. All agents extracted from O: drive council MD briefs and validated with correct frontmatter (description + mode). Golden config synced for disaster recovery.
+    </p>
+    <table class="table">
+      <tr><th>Agent</th><th>Mode</th><th>Domain</th><th>Authority</th></tr>
+      <tr><td><code>@titan</code></td><td>subagent</td><td>Macro Strategy, ROI, Wealth</td><td>High</td></tr>
+      <tr><td><code>@navigator</code></td><td>subagent</td><td>20-Year Roadmap, Milestones</td><td>High</td></tr>
+      <tr><td><code>@architect</code></td><td>subagent</td><td>n8n, System Design, Agent Mesh</td><td>High</td></tr>
+      <tr><td><code>@shield</code></td><td>subagent</td><td>Data Sovereignty, L1-L4, Encryption</td><td>CRITICAL</td></tr>
+      <tr><td><code>@warden</code></td><td>subagent</td><td>Network Security, Perimeter</td><td>CRITICAL</td></tr>
+      <tr><td><code>@auditor</code></td><td>subagent</td><td>CRA Compliance, Tax Strategy</td><td>CRITICAL</td></tr>
+      <tr><td><code>@chancellor</code></td><td>subagent</td><td>Bookkeeping, Cash Flow, FX</td><td>Medium-High</td></tr>
+      <tr><td><code>@catalyst</code></td><td>primary</td><td>Execution, State, Burnout</td><td>HARD GATE</td></tr>
+      <tr><td><code>@oracle</code></td><td>subagent</td><td>Trends, Signals, AI Future</td><td>Advisory-High</td></tr>
+      <tr><td><code>@sentinel-warden</code></td><td>subagent</td><td>Physical Security, Hardware</td><td>Medium</td></tr>
+      <tr><td><code>@apre</code></td><td>subagent</td><td>Peer Review Scoring Engine</td><td>Governance</td></tr>
+    </table>
+  </div>
+
+  <!-- COUNCIL SKILLS DEPLOYMENT -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Council Skills — Deployed to OpenCode</h2>
+      <span class="badge badge-cyan">12 Skills</span>
+    </div>
+    <div class="source">
+      Location: <code>~/.config/opencode/skills/</code> · Source: O: drive + backup
+    </div>
+    <p class="desc">
+      12 council-specific skills deployed. Sources: 6 from backup (ecc-universal compatible), 6 from O: drive (Catalyst/Chancellor/Shield member skills). All have valid frontmatter with name + description.
+    </p>
+    <div class="skills-grid">
+      <div class="skill-item"><strong>apre-review</strong> — Score proposals (Alignment/Security/Logic/Focus)</div>
+      <div class="skill-item"><strong>council-vote</strong> — Weighted council consensus protocol</div>
+      <div class="skill-item"><strong>configure-ecc</strong> — Interactive ECC installer wizard</div>
+      <div class="skill-item"><strong>data-classify</strong> — L1-L4 classification enforcement</div>
+      <div class="skill-item"><strong>tax-calendar</strong> — CRA deadlines, TFSA/RRSP, GST/HST</div>
+      <div class="skill-item"><strong>skill-stocktake</strong> — Audit skills quality &amp; coverage</div>
+      <div class="skill-item"><strong>daily-log</strong> — State tracking, wins, blockers, streaks</div>
+      <div class="skill-item"><strong>memory-management</strong> — Persistent cross-session context</div>
+      <div class="skill-item"><strong>task-management</strong> — Priority system, WIP limits, projects</div>
+      <div class="skill-item"><strong>bank-reconciliation</strong> — Ledger matching, variance detection</div>
+      <div class="skill-item"><strong>journal-entry</strong> — Double-entry bookkeeping preparation</div>
+      <div class="skill-item"><strong>compliance-monitoring</strong> — CRA + PIPEDA + corporate governance</div>
+    </div>
   </div>
 
   <!-- TOOL 1: AgentShield -->
@@ -480,10 +537,14 @@
       <tr><td><code>superpowers</code></td><td>0.0.2</td><td>npm registry</td><td>+0.00 MB</td><td><span class="badge badge-green">PASS</span></td></tr>
       <tr><td><code>ecc-universal</code></td><td>1.10.0</td><td><a href="https://ecc.tools/skills">ecc.tools/skills</a></td><td>+0.00 MB</td><td><span class="badge badge-green">PASS</span></td></tr>
       <tr><td><code>openspace</code></td><td>0.1.0</td><td><a href="https://github.com/HKUDS/OpenSpace">HKUDS/OpenSpace</a></td><td>+0.00 MB</td><td><span class="badge badge-green">PASS</span></td></tr>
+      <tr><td><code>aegis-memory</code></td><td>local</td><td>plugins/</td><td>+0.00 MB</td><td><span class="badge badge-green">DEPLOYED</span></td></tr>
+      <tr><td><code>apre-gate</code></td><td>local</td><td>plugins/</td><td>+0.00 MB</td><td><span class="badge badge-green">DEPLOYED</span></td></tr>
+      <tr><td><code>model-fallback</code></td><td>local</td><td>plugins/</td><td>+0.00 MB</td><td><span class="badge badge-green">DEPLOYED</span></td></tr>
+      <tr><td><code>vault-sync</code></td><td>local</td><td>plugins/</td><td>+0.00 MB</td><td><span class="badge badge-green">DEPLOYED</span></td></tr>
     </table>
     <p style="margin-top: 1rem; color: var(--muted); font-size: 0.82rem;">
-      All packages installed globally via npm. Config folder unchanged at 48.58 MB.
-      Watchdog: GREEN. Backups: 4/4 saved. GitHub: CONNECTED. OpenCode: stable. Council: 10/10 loaded.
+      All packages installed globally via npm. Config folder: 48.75 MB (+0.17 MB drift).
+      Watchdog: GREEN. Backups: 4/4 saved. GitHub: CONNECTED. OpenCode: stable. Council: 11/11 deployed. APRE: 8.55/10 TIER 1.
     </p>
   </div>
 
@@ -497,7 +558,12 @@
       <tr><th>Path</th><th>Purpose</th><th>Access</th></tr>
       <tr><td><code>O:\Apex_Aegis\</code></td><td>Source of Truth — Council, Governance, APRE</td><td>Read-only</td></tr>
       <tr><td><code>O:\Apex_Aegis\Council\</code></td><td>Council roles, governance charter, decision flow</td><td>Read-only</td></tr>
-      <tr><td><code>C:\Aegis_System\Config\OpenCode\</code></td><td>OpenCode configuration</td><td>Write (guarded)</td></tr>
+      <tr><td><code>~/.config/opencode/</code></td><td>Global OpenCode config (agents, skills, plugins)</td><td>Write (guarded)</td></tr>
+      <tr><td><code>~/.config/opencode/agents/</code></td><td>11 council agents (@titan, @shield, @apre, etc.)</td><td>Write (guarded)</td></tr>
+      <tr><td><code>~/.config/opencode/skills/</code></td><td>12 council skills (apre-review, council-vote, etc.)</td><td>Write (guarded)</td></tr>
+      <tr><td><code>~/.config/opencode/plugins/</code></td><td>4 aegis plugins (memory, apre-gate, fallback, vault-sync)</td><td>Write (guarded)</td></tr>
+      <tr><td><code>C:\Aegis_System\Config\OpenCode\golden\</code></td><td>Golden config — source of truth for config state</td><td>Write (guarded)</td></tr>
+      <tr><td><code>C:\Aegis_System\Config\OpenCode\backups\</code></td><td>Timestamped pre-change snapshots</td><td>Write (guarded)</td></tr>
       <tr><td><code>C:\Aegis_System\Projects\aegis\</code></td><td>Project files, AGENTS.md, reports</td><td>Write</td></tr>
       <tr><td><code>C:\Aegis_System\Recovery\scripts\</code></td><td>Watchdog, backup, recovery scripts</td><td>Write</td></tr>
       <tr><td><code>C:\Aegis_System\Logs\</code></td><td>Watchdog and system logs</td><td>Write</td></tr>

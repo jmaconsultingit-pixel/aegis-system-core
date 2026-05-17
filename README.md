@@ -1,6 +1,6 @@
 # AEGIS Sentinel — Full System Inventory
 
-**Phase 8 Installation + Phase 9 Council Re-Initialization · Rebuild #3 Final · May 16, 2026**
+**Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents · Rebuild #4 Final · May 17, 2026**
 
 ---
 
@@ -14,17 +14,21 @@
 | **GitHub Remote** | CONNECTED |
 | **Repository** | [jmaconsultingit-pixel/aegis-system-core](https://github.com/jmaconsultingit-pixel/aegis-system-core) |
 | **Remote Branch** | `main` (tracking `origin/main`) |
-| **Last Commit** | AEGIS REBUILD #3: COMPLETE |
+| **Last Commit** | AEGIS REBUILD #4: COUNCIL AGENTS DEPLOYED |
 | **System State** | LOCKED — All operations verified |
+| **Config Size** | 48.75 MB (+0.17 MB drift) — GREEN |
 
 ## AEGIS COUNCIL LOAD REPORT
 
-- Files discovered: 46
-- Council files: 36
-- Governance files: 9
-- APRE reports: 1
-- Council roles loaded: 10 / 10
-- Risk assessment: LOW (complete coverage)
+- Council agents deployed: 11 / 11
+- Council skills deployed: 12 / 12
+- Aegis plugins deployed: 4 / 4
+- AGENTS.md injected: 344 lines
+- Golden config synced: PARITY VERIFIED
+- opencode.jsonc updated: instructions + skills + plugins
+- Config drift: +0.17 MB (GREEN)
+- APRE review score: 8.55 / 10 — TIER 1
+- Veto check: ALL PASS
 
 ## Packages Installed
 
@@ -33,10 +37,59 @@
 | `ecc-agentshield` | 1.4.0 | [ecc.tools](https://ecc.tools) | PASS |
 | `superpowers` | 0.0.2 | npm registry | PASS |
 | `ecc-universal` | 1.10.0 | [ecc.tools/skills](https://ecc.tools/skills) | PASS |
+| `openspace` | 0.1.0 | [HKUDS/OpenSpace](https://github.com/HKUDS/OpenSpace) | PASS |
+
+## Council Agents — Deployed to OpenCode
+
+Location: `~/.config/opencode/agents/` · Config: `opencode.jsonc` · Golden: `C:\Aegis_System\Config\OpenCode\golden\`
+
+| Agent | Mode | Domain | Authority |
+|-------|------|--------|-----------|
+| `@titan` | subagent | Macro Strategy, ROI, Wealth | High |
+| `@navigator` | subagent | 20-Year Roadmap, Milestones | High |
+| `@architect` | subagent | n8n, System Design, Agent Mesh | High |
+| `@shield` | subagent | Data Sovereignty, L1-L4, Encryption | CRITICAL |
+| `@warden` | subagent | Network Security, Perimeter | CRITICAL |
+| `@auditor` | subagent | CRA Compliance, Tax Strategy | CRITICAL |
+| `@chancellor` | subagent | Bookkeeping, Cash Flow, FX | Medium-High |
+| `@catalyst` | primary | Execution, State, Burnout | HARD GATE |
+| `@oracle` | subagent | Trends, Signals, AI Future | Advisory-High |
+| `@sentinel-warden` | subagent | Physical Security, Hardware | Medium |
+| `@apre` | subagent | Peer Review Scoring Engine | Governance |
+
+## Council Skills — Deployed to OpenCode
+
+Location: `~/.config/opencode/skills/` · Source: O: drive + backup
+
+| Skill | Purpose |
+|-------|---------|
+| `apre-review` | Score proposals (Alignment/Security/Logic/Focus) |
+| `council-vote` | Weighted council consensus protocol |
+| `configure-ecc` | Interactive ECC installer wizard |
+| `data-classify` | L1-L4 classification enforcement |
+| `tax-calendar` | CRA deadlines, TFSA/RRSP, GST/HST |
+| `skill-stocktake` | Audit skills quality & coverage |
+| `daily-log` | State tracking, wins, blockers, streaks |
+| `memory-management` | Persistent cross-session context |
+| `task-management` | Priority system, WIP limits, projects |
+| `bank-reconciliation` | Ledger matching, variance detection |
+| `journal-entry` | Double-entry bookkeeping preparation |
+| `compliance-monitoring` | CRA + PIPEDA + corporate governance |
+
+## Aegis Plugins
+
+Location: `~/.config/opencode/plugins/`
+
+| Plugin | Hooks |
+|--------|-------|
+| `aegis-memory.ts` | session.compacting, tool.execute.after, message.updated, session.idle |
+| `apre-gate.ts` | file.edited, tool.execute.before |
+| `model-fallback.ts` | session.error (credit/quota exhaustion detection) |
+| `vault-sync.ts` | session.created (backup + vault sync) |
 
 ## The High Council — Decision Engine
 
-Location: `O:\Apex_Aegis\Council\` · Governance: `Council_Governance_Charter.md` v3.1
+Location: `O:\Apex_Aegis\Council\` (source) · Agents: `~/.config/opencode/agents/` (deployed) · Governance: `Council_Governance_Charter.md` v3.1
 
 | Role | Domain | Authority |
 |------|--------|-----------|
@@ -53,9 +106,11 @@ Location: `O:\Apex_Aegis\Council\` · Governance: `Council_Governance_Charter.md
 
 ## APRE — Peer Review Engine
 
-Location: `O:\Apex_Aegis\logs\apre_reports\` · Script: `run_apre.py`
+Location: `O:\Apex_Aegis\logs\apre_reports\` · Agent: `~/.config/opencode/agents/apre.md` · Skill: `~/.config/opencode/skills/apre-review/SKILL.md`
 
-Validates all complex and high-impact actions through multi-role evaluation. Cross-checks decisions for risk, scalability, and integrity before execution.
+Validates all complex and high-impact actions through multi-role evaluation. Cross-checks decisions for risk, scalability, and integrity before execution. Deployed as both an opencode subagent (`@apre`) and a skill (`/apre-review`).
+
+**Rebuild #4 APRE Score: 8.55 / 10 — TIER 1 AUTO-PROCEED**
 
 ## ECC Universal Skills & Agents
 
@@ -80,7 +135,12 @@ Validates all complex and high-impact actions through multi-role evaluation. Cro
 |------|---------|--------|
 | `O:\Apex_Aegis\` | Source of Truth — Council, Governance, APRE | Read-only |
 | `O:\Apex_Aegis\Council\` | Council roles, governance charter, decision flow | Read-only |
-| `C:\Aegis_System\Config\OpenCode\` | OpenCode configuration | Write (guarded) |
+| `~/.config/opencode/` | Global OpenCode config (agents, skills, plugins) | Write (guarded) |
+| `~/.config/opencode/agents/` | 11 council agents (@titan, @shield, @apre, etc.) | Write (guarded) |
+| `~/.config/opencode/skills/` | 12 council skills (apre-review, council-vote, etc.) | Write (guarded) |
+| `~/.config/opencode/plugins/` | 4 aegis plugins (memory, apre-gate, fallback, vault-sync) | Write (guarded) |
+| `C:\Aegis_System\Config\OpenCode\golden\` | Golden config — source of truth for config state | Write (guarded) |
+| `C:\Aegis_System\Config\OpenCode\backups\` | Timestamped pre-change snapshots | Write (guarded) |
 | `C:\Aegis_System\Projects\aegis\` | Project files, AGENTS.md, reports | Write |
 | `C:\Aegis_System\Recovery\scripts\` | Watchdog, backup, recovery scripts | Write |
 | `C:\Aegis_System\Logs\` | Watchdog and system logs | Write |
