@@ -288,6 +288,27 @@
         </div>
       </div>
 
+      <!-- v4.5 - May 18 -->
+      <div class="cl-entry">
+        <div class="cl-version"><span class="badge badge-purple">v4.5</span></div>
+        <div class="cl-body">
+          <div class="cl-header">
+            <span class="cl-date">2026-05-18</span>
+            <span class="cl-phase">Hardware Truth Cleanup + Deno Spec (Shield/Warden Reviewed)</span>
+          </div>
+          <ul class="cl-list">
+            <li><span class="cl-tag cl-tag-removed">REMOVED</span> <code>A:\AEGIS_CORE</code> from all system docs — drive does not exist (AGENTS.md, APEX_TECH_STACK.md, Aegis_Hardware_Manifest.md)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Node .170 to Hardware Truth table in AGENTS.md (was missing from injected instructions)</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> Drive Mapping simplified: <code>O:\</code> = Obsidian Vault, <code>C:\Aegis_System\</code> = local execution root</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Deno Migration Security Specification at <code>design/deno-migration-spec.md</code> — Shield/Warden-reviewed permission matrix for all 5 components</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> model-fallback spec: locked to <code>--allow-net=none</code>, <code>--allow-env=none</code> (plugin makes zero network calls)</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> n8n-bridge spec: Tailscale-only (<code>[NODE_248_TS]:5678</code>), LAN fallback deprecated pending .248 firewall fix</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> <code>DENO_DIR=C:\Aegis_System\deno-cache\</code> — pre-configured for when Deno is installed</li>
+            <li><span class="cl-tag cl-tag-fixed">FIXED</span> vault-sync spec: <code>--allow-net</code> removed (SMB not gated by Deno sockets), filesystem permissions narrowed</li>
+          </ul>
+        </div>
+      </div>
+
       <!-- v4.4 - May 17 -->
       <div class="cl-entry">
         <div class="cl-version"><span class="badge badge-green">v4.4</span></div>
