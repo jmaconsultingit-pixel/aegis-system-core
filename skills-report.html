@@ -233,7 +233,7 @@
 <div class="container">
 
   <h1>AEGIS Sentinel — Full System Inventory</h1>
-  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge + Phase 15 The Forges + Phase 15 n8n Auto-Healing · Rebuild #4 · May 17, 2026</p>
+  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge + Phase 15 The Forges + Phase 16 Debloat · Rebuild #4 · May 17, 2026</p>
 
   <!-- CHANGELOG -->
   <div class="card" style="border-color: var(--accent);">
@@ -262,6 +262,23 @@
             <li><span class="cl-tag cl-tag-fixed">FIXED</span> Module 'fs' disallowed error in Code nodes</li>
             <li><span class="cl-tag cl-tag-changed">CHANGED</span> SMTP test passed — <code>jmaconsulting.it@gmail.com</code> outbound confirmed working</li>
             <li><span class="cl-tag cl-tag-security">SECURITY</span> <code>N8N_ENCRYPTION_KEY</code> stored in Vault (<code>n8n-encryption-key.txt</code>) — L4, air-gapped</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- v4.4 - May 17 -->
+      <div class="cl-entry">
+        <div class="cl-version"><span class="badge badge-green">v4.4</span></div>
+        <div class="cl-body">
+          <div class="cl-header">
+            <span class="cl-date">2026-05-17</span>
+            <span class="cl-phase">Config Debloat — Junction Relocation (APRE 8.6/10 TIER 1)</span>
+          </div>
+          <ul class="cl-list">
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> <code>node_modules</code> relocated from config folder (48.57 MB) to <code>C:\Users\Progress\Aegis_Dependencies\opencode_node_modules\</code> via Windows Directory Junction</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> Config folder size collapsed from 49.04 MB (YELLOW) to 0.52 MB (GREEN) — 48.52 MB saved, 49.48 MB headroom restored</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> NTFS Junction preserves Node.js module resolution — zero code changes, all plugins and MCP servers remain functional</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> External dependency vault at <code>C:\Users\Progress\Aegis_Dependencies\</code> — outside 50 MB config quota</li>
           </ul>
         </div>
       </div>
