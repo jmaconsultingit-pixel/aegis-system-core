@@ -233,7 +233,7 @@
 <div class="container">
 
   <h1>AEGIS Sentinel — Full System Inventory</h1>
-  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge + Phase 15 The Forges + Phase 16 Debloat · Rebuild #4 · May 17, 2026</p>
+  <p class="subtitle">Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge + Phase 15 The Forges + Phase 16 Debloat + Phase 17 n8n Pipeline Live · Rebuild #4 · May 18, 2026</p>
 
   <!-- CHANGELOG -->
   <div class="card" style="border-color: var(--accent);">
@@ -244,6 +244,28 @@
     <p class="desc">Chronological record of notable system changes. Categories: <span class="badge badge-green">ADDED</span> <span class="badge badge-yellow" style="background:#1e3a5f;color:var(--accent);">CHANGED</span> <span class="badge badge-cyan" style="background:#7f1d1d;color:var(--orange);">FIXED</span> <span class="badge badge-red">REMOVED</span> <span class="badge badge-yellow">SECURITY</span> <span style="background:#581c87;color:var(--purple);" class="badge badge-purple">DEPRECATED</span></p>
 
     <div class="changelog">
+      <!-- v4.5 - May 18 -->
+      <div class="cl-entry">
+        <div class="cl-version"><span class="badge badge-green">v4.5</span></div>
+        <div class="cl-body">
+          <div class="cl-header">
+            <span class="cl-date">2026-05-18</span>
+            <span class="cl-phase">Phase 17 — n8n Pipeline Live (Gmail OAuth2 + SMTP + Troubleshooting)</span>
+          </div>
+          <ul class="cl-list">
+            <li><span class="cl-tag cl-tag-added">ADDED</span> Gmail OAuth2 credential created in n8n — tokens persisted across container restarts via N8N_ENCRYPTION_KEY</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> SMTP credential created in n8n — outbound email confirmed working (test sent successfully)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> n8n password reset procedure documented — `docker compose exec n8n n8n changepassword` + DB direct update fallback (current broken due to bcrypt hash format version <-> cost factor mismatch)</li>
+            <li><span class="cl-tag cl-tag-added">ADDED</span> N8N_HOST=localhost workaround documented — browser redirects fail with Tailscale IP on some ISPs (Starlink); localhost proxy bypasses the issue</li>
+            <li><span class="cl-tag cl-tag-fixed">FIXED</span> n8n database corruption — WAL/SHM stale files cleared; corrupt index `idx_workflow_webhook_path` dropped and rebuilt</li>
+            <li><span class="cl-tag cl-tag-fixed">FIXED</span> Admin password unusable — n8n 2.14.2 uses bcrypt hash version $2b$ but Node.js bcryptjs only supports $2a$; direct credential row UPDATE via DB required</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> n8n bridge status: deployed + auto-healing + LIVE — all pipeline components operational</li>
+            <li><span class="cl-tag cl-tag-changed">CHANGED</span> API key auth broken in n8n 2.14.2 — session cookie auth required for API calls; workaround: copy session cookie from browser</li>
+            <li><span class="cl-tag cl-tag-security">SECURITY</span> Gmail OAuth2 tokens stored encrypted at rest via N8N_ENCRYPTION_KEY — encryption key in Vault (L4, air-gapped)</li>
+          </ul>
+        </div>
+      </div>
+
       <!-- v4.3 - May 17 -->
       <div class="cl-entry">
         <div class="cl-version"><span class="badge badge-cyan">v4.3</span></div>
@@ -419,8 +441,11 @@
     <div class="status-line"><span class="status-label">Council skills deployed</span><span class="status-value" style="color: var(--green);">12 / 12</span></div>
     <div class="status-line"><span class="status-label">Aegis plugins deployed</span><span class="status-value" style="color: var(--green);">4 / 4</span></div>
     <div class="status-line"><span class="status-label">MCP servers wired</span><span class="status-value" style="color: var(--green);">5 / 5</span></div>
-    <div class="status-line"><span class="status-label">n8n bridge status</span><span class="status-value" style="color: var(--green);">DEPLOYED + AUTO-HEALING (Tailscale:[NODE_248_TS]:5678, restart=unless-stopped, daily backup 03:00, hourly health check)</span></div>
-    <div class="status-line"><span class="status-label">n8n auto-healing</span><span class="status-value" style="color: var(--green);">ACTIVE (encryption key + backup + health check)</span></div>
+    <div class="status-line"><span class="status-label">n8n bridge status</span><span class="status-value" style="color: var(--green);">LIVE — Gmail OAuth2 + SMTP confirmed (Tailscale:[NODE_248_TS]:5678, restart=unless-stopped, daily backup 03:00, hourly health check)</span></div>
+    <div class="status-line"><span class="status-label">n8n auto-healing</span><span class="status-value" style="color: var(--green);">ACTIVE (encryption key + backup + health check + DB corruption fix)</span></div>
+    <div class="status-line"><span class="status-label">n8n Gmail OAuth2</span><span class="status-value" style="color: var(--green);">WORKING — tokens persisted via N8N_ENCRYPTION_KEY</span></div>
+    <div class="status-line"><span class="status-label">n8n SMTP outbound</span><span class="status-value" style="color: var(--green);">WORKING — jmaconsulting.it@gmail.com confirmed</span></div>
+    <div class="status-line"><span class="status-label">n8n password reset</span><span class="status-value" style="color: var(--orange);">BROKEN — bcrypt $2b$ vs $2a$ mismatch in n8n 2.14.2; DB direct UPDATE required</span></div>
     <div class="status-line"><span class="status-label">npm audit</span><span class="status-value" style="color: var(--green);">0 vulnerabilities</span></div>
     <div class="status-line"><span class="status-label">AGENTS.md injected</span><span class="status-value" style="color: var(--green);">344 lines</span></div>
     <div class="status-line"><span class="status-label">Golden config synced</span><span class="status-value" style="color: var(--green);">PARITY VERIFIED</span></div>

@@ -1,6 +1,6 @@
-# AEGIS Sentinel — Full System Inventory (Phase 15 n8n Auto-Healing)
+# AEGIS Sentinel — Full System Inventory (Phase 17 n8n Pipeline Live)
 
-**Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge + Phase 15 The Forges + Phase 15 n8n Auto-Healing · Rebuild #4 · May 17, 2026**
+**Phase 8 Install + Phase 9 Council + Phase 10 Validated + Phase 11 OpenSpace + Phase 12 Council Agents + Phase 13 MCP Wiring + Phase 14 n8n Bridge + Phase 15 The Forges + Phase 16 Debloat + Phase 17 n8n Pipeline Live · Rebuild #4 · May 18, 2026**
 
 ---
 
@@ -14,8 +14,8 @@
 | **GitHub Remote** | CONNECTED |
 | **Repository** | [jmaconsultingit-pixel/aegis-system-core](https://github.com/jmaconsultingit-pixel/aegis-system-core) |
 | **Remote Branch** | `main` (tracking `origin/main`) |
-| **Last Commit** | AEGIS REBUILD #4: N8N AUTO-HEALING + BRIDGE DEPLOYED |
-| **System State** | LOCKED — All operations verified |
+| **Last Commit** | AEGIS REBUILD #4: N8N PIPELINE LIVE — GMAIL OAUTH2 + SMTP + TROUBLESHOOTING |
+| **System State** | OPERATIONAL — All pipeline components live, known workarounds documented |
 | **Config Size** | 48.75 MB (+0.17 MB drift) — GREEN |
 
 ## AEGIS COUNCIL LOAD REPORT
@@ -64,9 +64,9 @@ Location: `opencode.jsonc` `mcp` block · Transport: local stdio (n8n bridge use
 
 `n8n-webhook-allowlist.json` is stored on the NAS (`\\[NODE_220_TS]\Obsidian_Vault\Apex_Aegis\Config\`) alongside `.env` for centralized credential management.
 
-## n8n Auto-Healing — Phase 15 Deployment
+## n8n Pipeline Live — Phase 17 Deployment
 
-Node .248 n8n instance hardened against credential loss, OAuth breakage, and container failure.
+Node .248 n8n instance fully operational: Gmail OAuth2 working, SMTP confirmed, auto-healing active. All pipeline components are live as of May 18, 2026.
 
 ### Configuration Items
 
@@ -93,6 +93,20 @@ Node .248 n8n instance hardened against credential loss, OAuth breakage, and con
 | Gmail OAuth redirect URI mismatch | Changed from `localhost` to Tailscale IP (`[NODE_248_TS]`) |
 | Module 'fs' disallowed in Code nodes | Added `NODE_FUNCTION_ALLOW_BUILTIN=fs,path` env var |
 | SMTP outbound | `jmaconsulting.it@gmail.com` confirmed working |
+| Database corruption | WAL/SHM stale files cleared; corrupt `idx_workflow_webhook_path` index dropped and rebuilt |
+| Admin password unusable (bcrypt $2b$ vs $2a$) | n8n 2.14.2 uses `$2b$` hash prefix but Node.js bcryptjs reads `$2a$`; direct `UPDATE` on credential row required |
+| API key auth broken in n8n 2.14.2 | Session cookie auth required for API calls; copy session cookie from browser as workaround |
+| Browser redirect fails with Tailscale IP (Starlink) | Set `N8N_HOST=localhost` and use localhost URL to bypass ISP routing issues |
+
+### Phase 17 — Pipeline Operational Status
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| **Gmail OAuth2** | ✅ WORKING | Token persisted via N8N_ENCRYPTION_KEY; survives container restart |
+| **SMTP Outbound** | ✅ WORKING | `jmaconsulting.it@gmail.com` confirmed |
+| **Password Reset** | ⚠️ WORKAROUND | bcrypt hash version mismatch; DB direct UPDATE required |
+| **API Auth** | ⚠️ WORKAROUND | Session cookie auth; API key broken in n8n 2.14.2 |
+| **N8N_HOST** | ⚠️ WORKAROUND | Set to `localhost` for browser access; Tailscale IP causes Starlink redirect failures |
 
 ## Council Agents — Deployed to OpenCode
 
