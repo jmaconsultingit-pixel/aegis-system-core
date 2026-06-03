@@ -10,3 +10,26 @@
 node_modules/
 package-lock.json
 bun.lock
+
+# =============================================================================
+# Security: Hardware/IP exclusions (Phase 2 — 2026-06-03)
+# =============================================================================
+
+# The canonical hardware manifest — never commit to any repo
+*Aegis_Hardware_Manifest.md*
+
+# Secret/credential files
+*.secret
+*.cred
+credentials.json
+*.credential
+
+# Generated BFG cleanup artifacts
+*.bfg-report/
+*bfg-report*/
+
+# DIY deploy scripts (contain placeholders, not IPs — keep them safe)
+*.env
+*.env.*
+
+# Keep deploy scripts but ensure they never contain bare IPs (checked by pre-commit hook)
